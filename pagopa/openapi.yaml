@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title: pagoPa RTP - OpenAPI 3.1
+  description: DESCRIPTION
+  version: 1.0.11
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: rtp-notice
+    description: API Group aims to notify a pagoPa notice through Request To Pay (RTP)
+paths:
+  /rtp-notices:
+    post:
+      tags:
+        - rtp-notice
+      summary: "Create and send a new RTP from a pagoPa notice"
+      description: ""
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRequestToPayNotice"
+      responses:
+        201:
+          description: "Request to pay created and sent"
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties:
+                  rtpId:
+                    $ref: "#/components/schemas/RequestToPayId"
+          
+
+components:
+  schemas:
+    AmountEuroCents:
+      description: Amount for payments, in euro cents
+      type: integer
+      minimum: 0
+      maximum: 99999999
+
+    NoticeCode:
+      type: string
+      pattern: "\\d{18}"
+      description: "pagoPa notice's code"
+      example: "311111111112222222"
+      externalDocs:
+        description: "See noticeNumber field"
+        url: "https://docs.pagopa.it/sanp/appendici/primitive#verifypaymentnotice-1"
+    
+    PayeeId:
+      type: string
+      pattern: "\\d{11}"
+      description: "The payee id (e.g. EC fiscal code)"
+      example: "77777777777"
+      externalDocs:
+        description: "See idPA field"
+        url: "https://docs.pagopa.it/sanp/appendici/primitive#paverifypaymentnotice"
+
+    RequestToPayId:
+      type: string
+      format: uuid
+      description: "Request to pay unique id"   
+
+    CreateRequestToPayNotice:
+      type: object
+      properties:
+        noticeCode:
+          $ref: "#/components/schemas/NoticeCode"
+        amount:
+          $ref: "#/components/schemas/AmountEuroCents"
+        description:
+          type: string
+          description: "The pagopa notice's description"
+          maxLength: 140
+        expiryDate:
+          type: string
+          description: "The pagoPa notice's expiry date. Formatted as ISO 8601 [YYYY]-[MM]-[DD]"
+          format: date
+          example: "2024-12-03"
+        payeeId:
+          $ref: "#/components/schemas/PayeeId"
+        payerId:
+          type: string
+          description: "The id of the recipient of the request to pay. The id is the fiscal code"
+          example: "ABCDEF12G34H567I"
