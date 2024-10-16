@@ -8,13 +8,13 @@ info:
 servers:
   - url: http://localhost:8080
 tags:
-  - name: rtp-notice
+  - name: rtps
     description: API Group aims to notify a pagoPa notice through Request To Pay (RTP)
 paths:
-  /rtp-notices:
+  /rtps:
     post:
       tags:
-        - rtp-notice
+        - rtps
       operationId: "createRtp"
       summary: "Create and send a new RTP from a pagoPa notice"
       description: "Create and send a new RTP from a pagoPa notice"
