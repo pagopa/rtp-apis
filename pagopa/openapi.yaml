@@ -16,22 +16,21 @@ paths:
       summary: "Create and send a new RTP from a pagoPa notice"
       description: ""
       requestBody:
-        description: ""
+        description: "pagoPa notice's details to create as RTP"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateRequestToPayNotice"
+              $ref: "#/components/schemas/CreateRtp"
       responses:
         201:
           description: "Request to pay created and sent"
-          content: 
-            application/json: 
-              schema: 
-                type: object
-                properties:
-                  rtpId:
-                    $ref: "#/components/schemas/RequestToPayId"
+          headers:
+            Location:
+              required: true
+              description: "The location of created rtp"
+              schema:
+                $ref: "#/components/schemas/RtpLocation"
           
 
 components:
@@ -42,7 +41,7 @@ components:
       minimum: 0
       maximum: 99999999
 
-    NoticeCode:
+    NoticeNumber:
       type: string
       pattern: "\\d{18}"
       description: "pagoPa notice's code"
@@ -60,16 +59,22 @@ components:
         description: "See idPA field"
         url: "https://docs.pagopa.it/sanp/appendici/primitive#paverifypaymentnotice"
 
-    RequestToPayId:
+    RtpId:
       type: string
       format: uuid
       description: "Request to pay unique id"   
 
-    CreateRequestToPayNotice:
+    RtpLocation:
+      type: string
+      description: "The location of created resource"
+      format: url
+      example: "https://domain.com/rtp-notices/{rtpId}"
+
+    CreateRtp:
       type: object
       properties:
-        noticeCode:
-          $ref: "#/components/schemas/NoticeCode"
+        noticeNumber:
+          $ref: "#/components/schemas/NoticeNumber"
         amount:
           $ref: "#/components/schemas/AmountEuroCents"
         description:
