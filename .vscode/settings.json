@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": "file:///Users/andrea.petreti/Development/rtp-apis/.github/workflows/validate-openapi.yaml"
-    }
-}
