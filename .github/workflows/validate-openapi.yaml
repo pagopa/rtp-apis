@@ -1,0 +1,23 @@
+name: Run Spectral on Pull Requests
+
+on:
+  pull_request:
+    paths:
+      - 'openapi/**/*.yaml'
+      - 'openapi/**/*.yml'
+  
+permissions:
+  pull-requests: write
+
+jobs:
+  build:
+    name: Run Spectral
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Run Spectral
+      - uses: stoplightio/spectral-action@2ad0b9302e32a77c1caccf474a9b2191a8060d83 #v0.8.11
+        with:
+          file_glob: 'openapi/**/(*.yaml|*.yml)'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
