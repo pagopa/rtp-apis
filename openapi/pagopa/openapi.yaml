@@ -71,7 +71,7 @@ components:
       type: string
       description: "The location of created resource"
       format: url
-      example: "https://domain.com/rtp-notices/{rtpId}"
+      example: "https://domain.com/rtps/{rtpId}"
 
     CreateRtp:
       type: object

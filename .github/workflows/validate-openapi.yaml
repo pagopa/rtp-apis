@@ -7,7 +7,7 @@ on:
       - 'openapi/**/*.yml'
   
 permissions:
-  pull-requests: write
+  checks: write
 
 jobs:
   build:
