@@ -60,6 +60,7 @@ components:
           $ref: "#/components/schemas/PayeeId"
         name:
           type: string
+          maxLength: 140
           description: "The name of payee (e.g. EC name or Company Name)"
           example: "Comune di Roma"
       required:
