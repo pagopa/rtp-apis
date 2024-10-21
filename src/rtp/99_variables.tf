@@ -48,3 +48,8 @@ variable "domain" {
     error_message = "Max length is 12 chars."
   }
 }
+
+variable "dns_zone_prefix" {
+  type        = string
+  description = "The DNS zone prefix e.g. dev.cstar.pagopa.it"
+}
