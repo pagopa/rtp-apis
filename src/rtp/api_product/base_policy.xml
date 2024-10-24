@@ -12,7 +12,20 @@
 -->
 <policies>
   <inbound>
-    <base />
+    <cors allow-credentials="true">
+      <allowed-origins>
+        <origin>https://${rtp_fe_origin}</origin>${dev_origin}
+      </allowed-origins>
+      <allowed-methods preflight-result-max-age="300">
+        <method>*</method>
+      </allowed-methods>
+      <allowed-headers>
+        <header>*</header>
+      </allowed-headers>
+      <expose-headers>
+        <header>*</header>
+      </expose-headers>
+    </cors>
   </inbound>
   <backend>
     <base />

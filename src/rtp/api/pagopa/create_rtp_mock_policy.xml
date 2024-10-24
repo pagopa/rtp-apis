@@ -12,6 +12,7 @@
 -->
 <policies>
     <inbound>
+        <base />
         <set-variable name="uuid" value="@(Guid.NewGuid().ToString())"/>
         <return-response>
             <set-status code="200" reason="OK" />
