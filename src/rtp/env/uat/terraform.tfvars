@@ -14,3 +14,5 @@ tags = {
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
   Application = "RTP"
 }
+
+dns_zone_prefix = "uat.cstar.pagopa.it"
