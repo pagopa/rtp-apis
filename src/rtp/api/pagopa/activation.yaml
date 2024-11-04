@@ -1,9 +1,10 @@
 openapi: 3.0.3
 
 info:
-  title: RTP Activation API
+  title: RTP Activation API.
   version: 1.0.0
-  description: API to handle RTP activations.
+  description: |
+    API to handle RTP activations initiated by the Payer's RTP Service Provider.
   contact:
     name: PagoPA S.p.A.
     email: rtp@pagopa.it
@@ -20,11 +21,302 @@ servers:
     x-internal: false
     
 tags:
-  - name: admin
-    description: Administrative operation
+  - name: create
+    description: Create operation.
+  - name: read
+    description: Read operation.
+  - name: update
+    description: Update operation.
+  - name: delete
+    description: Delete operation.
 
 paths:
   /activations:
+    post:
+      operationId: activate
+      summary: RTP activation initiated by the Payer's RTP Service Provider.
+      description: |
+        The operation is used by Payer's RTP Service Provider to enable the
+        Payee's RTP Service Provider to send RTP messages to the Payer's RTP
+        Service Provider.
+        
+        When the operation is used by not-admin subject, the solution verifies
+        that the Payer's RTP Service Provider ID matches the subject claim of
+        the access token.
+        
+        The operation returns `409 Conflict` if for the specified Payer ID an
+        activation already exists.
+      tags: [create]
+      security:
+        - oAuth2: [admin_rtp_activations, write_rtp_activations]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateOrUpdateActivation'
+      responses:
+        "201":
+          #description: Created.
+          $ref: '#/components/responses/CreateActivation'
+        "400":
+          #description: Bad request.
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Wrong credentials.
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "409":
+          #description: Conflict.
+          $ref: '#/components/responses/Error'
+        "415":
+          #description: Unsupported media type. Did you provide application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request.
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error.
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
+
+    get:
+      operationId: getActivations
+      summary: Returns RTP activations.
+      description: |
+        The operation returns all the RTP activations stored by the solution.
+        
+        When the operation is used by not-admin subject, the solution returns
+        the RTP activations which have the Payer's RTP Service Provider ID that
+        matches the subject claim of the access token.
+      tags: [read]
+      security:
+        - oAuth2: [admin_rtp_activations, read_rtp_activations]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        "200":
+          #description: Ok.
+          $ref: '#/components/responses/PageOfActivations'
+        "400":
+          #description: Bad request.
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Access token is missing or invalid.
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden.
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request.
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error.
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
+
+  /activations/{activationId}:
+    get:
+      operationId: getActivation
+      summary: Returns a RTP activation.
+      description: |
+        The operation finds a RTP activation by its ID.
+        
+        When the operation is used by not-admin subject, the solution returns
+        the RTP activation only if its Payer's RTP Service Provider ID matches
+        the subject claim of the access token, otherwise `404 Not Found` is
+        returned.
+      tags: [read]
+      security:
+        - oAuth2: [admin_rtp_activations, read_rtp_activations]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/ActivationId'
+      responses:
+        "200":
+          #description: Found.
+          $ref: '#/components/responses/Activation'
+        "400":
+          #description: Bad request.
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Access token is missing or invalid.
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden.
+          $ref: '#/components/responses/Error'
+        "404":
+          #description: Not found.
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request.
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error.
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
+
+    put:
+      operationId: updateActivation
+      summary: Updates a RTP activation.
+      description: |
+        The operation updates a RTP actviation searching it by its ID.
+        
+        When the operation is used by not-admin subject, the solution returns
+        `404 Not Found` if the Payer's RTP Service Provider ID of the activation
+        doesn't match the subject claim of the access token.
+      tags: [update]
+      security:
+        - oAuth2: [admin_rtp_activations, write_rtp_activations]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/ActivationId'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateOrUpdateActivation'
+      responses:
+        "204":
+          #description: No content
+          $ref: '#/components/responses/NoContent'
+        "400":
+          #description: Bad request
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Wrong credentials
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden
+          $ref: '#/components/responses/Error'
+        "404":
+          #description: Not found
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "415":
+          #description: Unsupported media type. Did you provide application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error
+          $ref: '#/components/responses/Error'
+
+    delete:
+      operationId: deleteActivation
+      summary: Deletes a RTP activation.
+      description: |
+        The operation deletes a RTP actviation searching it by its ID.
+        
+        When the operation is used by not-admin subject, the solution returns
+        `404 Not Found` if the Payer's RTP Service Provider ID of the activation
+        doesn't match the subject claim of the access token.
+      tags: [delete]
+      security:
+        - oAuth2: [admin_rtp_activations, write_rtp_activations]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/ActivationId'
+      responses:
+        "204":
+          #description: No content
+          $ref: '#/components/responses/NoContent'
+        "400":
+          #description: Bad request
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Access token is missing or invalid
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden
+          $ref: '#/components/responses/Error'
+        "404":
+          #description: Not found
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error
+          $ref: '#/components/responses/Error'
+
+  /activations/findByPayerId:
+    get:
+      operationId: findActivationByPayerId
+      summary: Finds a RTP activation by Payer ID.
+      description: |
+        The operation finds a RTP activation by its Payer ID.
+        
+        When the operation is used by not-admin subject, the solution returns
+        the RTP activation only if its Payer's RTP Service Provider ID matches
+        the subject claim of the access token, otherwise `404 Not Found` is
+        returned.
+      tags: [read]
+      security:
+        - oAuth2: [admin_rtp_activations, read_rtp_activations]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/PayerId'
+      responses:
+        "200":
+          #description: Found.
+          $ref: '#/components/responses/Activation'
+        "400":
+          #description: Bad request.
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Access token is missing or invalid.
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden.
+          $ref: '#/components/responses/Error'
+        "404":
+          #description: Not found.
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request.
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error.
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
 
 components:
   # ============================================================================
@@ -126,7 +418,7 @@ components:
     # Basic types for technical stuff.
     # --------------------------------------------------------------------------
     ActivationId:
-      description: Identifier of the activation resource.
+      description: Identifier of the RTP activation resource.
       type: string
       format: uuid
       pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
@@ -135,13 +427,13 @@ components:
       example: "d0d654e6-97da-4848-b568-99fedccb642b"
 
     ActivationLocation:
-      description: URL of the activation resource.
+      description: URL of the RTP activation resource.
       type: string
       format: uri
       pattern: "^[ -~]{1,2048}$"
       minLength: 1
       maxLength: 2048
-      example: "https://rtp-d-apim.azure-api.net/rtp/activations/d0d654e6-97da-4848-b568-99fedccb642b"
+      example: "https://rtp.cstar.pagopa.it/activations/d0d654e6-97da-4848-b568-99fedccb642b"
 
     RequestId:
       description: Identifier of the request.
@@ -428,11 +720,41 @@ components:
               $ref: '#/components/schemas/ActivationId'
           required:
             - id
-        - $ref: '#/components/schemas/ActivationWoId'
+        - $ref: '#/components/schemas/ActivationReq'
+      example:
+        id: "d0d654e6-97da-4848-b568-99fedccb642b"
+        payer:
+          id: "RSSMRA85T10A562S"
+          name: "Mario Rossi"
+          address:
+            countryCode: "IT"
+            addressLines:
+              - "Via Sardegna, 38"
+              - "00187 Roma (RM)"
+            rtpSpId: "10987654321"
 
-    ActivationWoId:
+    Activations:
+      description: List of RTP activations.
+      type: array
+      minItems: 0
+      maxItems: 128
+      items:
+        $ref: '#/components/schemas/Activation'
+      example:
+        - id: "d0d654e6-97da-4848-b568-99fedccb642b"
+          payer:
+            id: "RSSMRA85T10A562S"
+            name: "Mario Rossi"
+            address:
+              countryCode: "IT"
+              addressLines:
+                - "Via Sardegna, 38"
+                - "00187 Roma (RM)"
+            rtpSpId: "10987654321"
+
+    ActivationReq:
       description: |
-        Data of a RTP activation request.
+        Data of a RTP activation.
         
         For bulk activation, `Payee` property must be omitted.
         
@@ -441,7 +763,7 @@ components:
         References:
           - §5.1.1 of `CPI-Tavolo-incassi-e-pagamenti-pubblici-RTP-PagoPA.pdf`
       type: object
-      additionalProperties: false
+      additionalProperties: true # It's extended by another object.
       properties:
         payer:
           $ref: '#/components/schemas/Payer'
@@ -492,6 +814,36 @@ components:
       example:
         - "Via Sardegna, 38"
         - "00187 Roma (RM)"
+
+    PageOfActivations:
+      description: Page of RTP activations.
+      type: object
+      additionalProperties: false
+      properties:
+        activations:
+          $ref: '#/components/schemas/Activations'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+      required:
+        - activations
+        - page
+      example:
+        activations:
+          - id: "d0d654e6-97da-4848-b568-99fedccb642b"
+            payer:
+              id: "RSSMRA85T10A562S"
+              name: "Mario Rossi"
+              address:
+                countryCode: "IT"
+                addressLines:
+                  - "Via Sardegna, 38"
+                  - "00187 Roma (RM)"
+              rtpSpId: "10987654321"
+        page:
+          totalElements: 2
+          totalPages: 2
+          page: 1
+          size: 1
 
     Payee:
       description: |
@@ -592,11 +944,25 @@ components:
   # Request bodies.
   # ============================================================================
   requestBodies:
+    CreateOrUpdateActivation:
+      description: Request to create or update a RTP activation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ActivationReq'
 
   # ============================================================================
   # Parameters.
   # ============================================================================
   parameters:
+    ActivationId:
+      name: activationId
+      in: path
+      description: Identifier of the RTP activation resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ActivationId'
+
     PageNumber:
       name: page
       in: query
@@ -613,11 +979,19 @@ components:
       schema:
         $ref: '#/components/schemas/PageSize'
 
+    PayerId:
+      name: PayerId
+      in: header
+      description: Identifier of the Payer.
+      required: true
+      schema:
+        $ref: '#/components/schemas/FiscalCode'
+
     RequestId:
       name: RequestId
       in: header
       description: Identifier of the request.
-      required: false
+      required: true
       schema:
         $ref: '#/components/schemas/RequestId'
 
@@ -627,16 +1001,63 @@ components:
       description: Version of the required API.
       required: false
       schema:
-        type: string
-        pattern: "^[ -~]{1,64}$"
-        minLength: 1
-        maxLength: 64
-        example: "1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay"
+        $ref: '#/components/schemas/Version'
 
   # ============================================================================
   # Responses
   # ============================================================================
   responses:
+    Activation:
+      description: Response returned when RTP activation data is requested.
+      headers:
+        Access-Control-Allow-Origin:
+          description: |
+            Indicates whether the response can be shared with requesting code
+            from the given origin.
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessControlAllowOrigin'
+        RateLimit-Limit:
+          description: The number of allowed requests in the current period
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitLimit'
+        RateLimit-Reset:
+          description: The number of seconds left in the current period
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitReset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Activation'
+
+    CreateActivation:
+      description: Response returned when a RTP activation is requested.
+      headers:
+        Access-Control-Allow-Origin:
+          description: |
+            Indicates whether the response can be shared with requesting code
+            from the given origin.
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessControlAllowOrigin'
+        RateLimit-Limit:
+          description: The number of allowed requests in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitLimit'
+        RateLimit-Reset:
+          description: The number of seconds left in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitReset'
+        Location:
+          description: URL of the activation resource.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ActivationLocation'
+
     Error:
       description: Error response.
       headers:
@@ -694,6 +1115,31 @@ components:
           schema:
             $ref: '#/components/schemas/RateLimitReset'
 
+    PageOfActivations:
+      description: Response to the request to get RTP activations.
+      headers:
+        Access-Control-Allow-Origin:
+          description: |
+            Indicates whether the response can be shared with requesting code
+            from the given origin.
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessControlAllowOrigin'
+        RateLimit-Limit:
+          description: The number of allowed requests in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitLimit'
+        RateLimit-Reset:
+          description: The number of seconds left in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitReset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PageOfActivations'
+
   # ============================================================================
   # Security schemes.
   # ============================================================================
@@ -708,7 +1154,6 @@ components:
           tokenUrl: /token
           refreshUrl: /token
           scopes:
-            rtp_activations:admin: Admin RPT activation.
-            rtp_activations:create_or_update: Create or update RTP activation.
-            rtp_activations:read: Read RTP activation.
-            rtp_activations:delete: Delete RTP activation.
+            admin_rtp_activations: Admin RPT activation.
+            write_rtp_activations: Create, update or delete RTP activation.
+            read_rtp_activations: Read RTP activation.
