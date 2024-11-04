@@ -702,14 +702,21 @@ components:
 
     Errors:
       description: List of errors.
-      type: array
-      minItems: 1
-      maxItems: 32
-      items:
-        $ref: '#/components/schemas/Error'
+      type: object
+      additionalProperties: false
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          maxItems: 32
+          items:
+            $ref: '#/components/schemas/Error'
+      required:
+        - errors
       example:
-        - code: "01000000F"
-          description: "Wrong party identifier"
+        errors:
+          - code: "01000000F"
+            description: "Wrong party identifier"
       
     # ------------------------------------------------------
     # Domain specific complex types.
