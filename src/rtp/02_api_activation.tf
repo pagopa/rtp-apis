@@ -28,7 +28,7 @@ resource "azurerm_api_management_api" "rtp_activation_api" {
 
   import {
     content_format = "openapi"
-    content_value  = templatefile("./api/activation/openapi.yaml", {})
+    content_value  = templatefile("./api/pagopa/activation.yaml", {})
   }
 }
 
@@ -47,7 +47,7 @@ resource "azurerm_api_management_api_operation_policy" "rtp_activate_policy" {
   resource_group_name = data.azurerm_api_management.this.resource_group_name
   operation_id        = "activate"
 
-  xml_content = templatefile("./api/activation/activation_policy.xml", {
+  xml_content = templatefile("./api/pagopa/activation_policy.xml", {
     base_url : "${local.rtp_base_url}/${azurerm_api_management_api.rtp_activation_api.path}/${azurerm_api_management_api.rtp_activation_api.version}/rtps"
   })
 }
