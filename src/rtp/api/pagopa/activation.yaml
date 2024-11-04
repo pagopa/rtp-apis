@@ -44,7 +44,8 @@ paths:
         that the Payer's RTP Service Provider ID matches the subject claim of
         the access token. `403 Forbidden` is returned on mismatch.
         
-        If an activation already exists for the provided Payer ID, a new one is
+        If an activation already exists for the provided Payer ID/Payee ID or,
+        in case of bulk activation, for the provided Payer ID, a new one is
         created. See §3.3.3 of
         `CPI-Tavolo-incassi-e-pagamenti-pubblici-RTP-PagoPA.pdf` for more
         details.
@@ -275,26 +276,27 @@ paths:
 
   /activations/findByPayerId:
     get:
-      operationId: findActivationByPayerId
+      operationId: findActivationsByPayerId
       summary: Finds a RTP activation by Payer ID.
       description: |
-        The operation finds a RTP activation by its Payer ID.
+        The operation finds RTP activations by Payer ID.
         
         When the operation is used by not-admin subject, the system returns
-        the RTP activation only if its Payer's RTP Service Provider ID matches
-        the subject claim of the access token, otherwise `404 Not Found` is
-        returned.
+        the RTP activations with the Payer's RTP Service Provider ID that
+        matches the subject claim of the access token.
       tags: [read]
       security:
         - oAuth2: [admin_rtp_activations, read_rtp_activations]
       parameters:
         - $ref: '#/components/parameters/RequestId'
         - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
         - $ref: '#/components/parameters/PayerId'
       responses:
         "200":
-          #description: Found.
-          $ref: '#/components/responses/Activation'
+          #description: Ok.
+          $ref: '#/components/responses/PageOfActivations'
         "400":
           #description: Bad request.
           $ref: '#/components/responses/Error'
@@ -303,9 +305,6 @@ paths:
           $ref: '#/components/responses/Error'
         "403":
           #description: Forbidden.
-          $ref: '#/components/responses/Error'
-        "404":
-          #description: Not found.
           $ref: '#/components/responses/Error'
         "406":
           #description: Not acceptable. Did you require application/json?
