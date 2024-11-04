@@ -527,6 +527,21 @@ components:
       maxLength: 35
       example: "d251b42ebcb94da586bdb20b525856c8"
 
+    EffectiveActivationDate:
+      description: |
+        Effective activation date (B035).
+                
+        Date and time at which activation has been stored.
+                
+        References:
+          - §5.1.2 of `CPI-Tavolo-incassi-e-pagamenti-pubblici-RTP-PagoPA.pdf`
+          - `/xs:schema/xs:complexType[@name='ActivationStatus2']/xs:sequence/xs:element[@name='FctvActvtnDt']`
+            of `EPC254-23_V1.0_reda.073.001.01_DSO-15.xsd` or
+            `EPC254-23_V1.0_reda.073.001.01_DSO-31.xsd`
+      type: string
+      format: date-time
+      example: "2024-10-30T16:39:34+01:00"
+
     EndDate:
       description: |
         Activation end date (B025).
@@ -726,11 +741,15 @@ components:
           properties:
             id:
               $ref: '#/components/schemas/ActivationId'
+            effectiveActivationDate:
+              $ref: '#/components/schemas/EffectiveActivationDate'
           required:
             - id
+            - effectiveActivationDate
         - $ref: '#/components/schemas/ActivationReq'
       example:
         id: "d0d654e6-97da-4848-b568-99fedccb642b"
+        effectiveActivationDate: "2024-10-30T16:39:34+01:00"
         payer:
           id: "RSSMRA85T10A562S"
           name: "Mario Rossi"
@@ -739,7 +758,7 @@ components:
             addressLines:
               - "Via Sardegna, 38"
               - "00187 Roma (RM)"
-            rtpSpId: "10987654321"
+          rtpSpId: "10987654321"
 
     Activations:
       description: List of RTP activations.
@@ -750,6 +769,7 @@ components:
         $ref: '#/components/schemas/Activation'
       example:
         - id: "d0d654e6-97da-4848-b568-99fedccb642b"
+          effectiveActivationDate: "2024-10-30T16:39:34+01:00"
           payer:
             id: "RSSMRA85T10A562S"
             name: "Mario Rossi"
@@ -838,6 +858,7 @@ components:
       example:
         activations:
           - id: "d0d654e6-97da-4848-b568-99fedccb642b"
+            effectiveActivationDate: "2024-10-30T16:39:34+01:00"
             payer:
               id: "RSSMRA85T10A562S"
               name: "Mario Rossi"
