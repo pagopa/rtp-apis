@@ -41,7 +41,7 @@ resource "azurerm_api_management_product_api" "rtp_activation_product_api" {
 }
 
 ## Override API Operations Policies ##
-resource "azurerm_api_management_api_operation_policy" "rtp_payee_activate_policy" {
+resource "azurerm_api_management_api_operation_policy" "rtp_activate_policy" {
   api_name            = azurerm_api_management_api.rtp_activation_api.name
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
