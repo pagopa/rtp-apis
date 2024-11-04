@@ -40,12 +40,14 @@ paths:
         Payee's RTP Service Provider to send RTP messages to the Payer's RTP
         Service Provider.
         
-        When the operation is used by not-admin subject, the solution verifies
+        When the operation is used by not-admin subject, the system verifies
         that the Payer's RTP Service Provider ID matches the subject claim of
-        the access token.
+        the access token. `403 Forbidden` is returned on mismatch.
         
-        The operation returns `409 Conflict` if for the specified Payer ID an
-        activation already exists.
+        If an activation already exists for the provided Payer ID, a new one is
+        created. See §3.3.3 of
+        `CPI-Tavolo-incassi-e-pagamenti-pubblici-RTP-PagoPA.pdf` for more
+        details.
       tags: [create]
       security:
         - oAuth2: [admin_rtp_activations, write_rtp_activations]
@@ -70,9 +72,6 @@ paths:
         "406":
           #description: Not acceptable. Did you require application/json?
           $ref: '#/components/responses/Error'
-        "409":
-          #description: Conflict.
-          $ref: '#/components/responses/Error'
         "415":
           #description: Unsupported media type. Did you provide application/json?
           $ref: '#/components/responses/Error'
@@ -90,9 +89,9 @@ paths:
       operationId: getActivations
       summary: Returns RTP activations.
       description: |
-        The operation returns all the RTP activations stored by the solution.
+        The operation returns all the RTP activations stored by the system.
         
-        When the operation is used by not-admin subject, the solution returns
+        When the operation is used by not-admin subject, the system returns
         the RTP activations which have the Payer's RTP Service Provider ID that
         matches the subject claim of the access token.
       tags: [read]
@@ -136,7 +135,7 @@ paths:
       description: |
         The operation finds a RTP activation by its ID.
         
-        When the operation is used by not-admin subject, the solution returns
+        When the operation is used by not-admin subject, the system returns
         the RTP activation only if its Payer's RTP Service Provider ID matches
         the subject claim of the access token, otherwise `404 Not Found` is
         returned.
@@ -182,9 +181,12 @@ paths:
       description: |
         The operation updates a RTP actviation searching it by its ID.
         
-        When the operation is used by not-admin subject, the solution returns
-        `404 Not Found` if the Payer's RTP Service Provider ID of the activation
-        doesn't match the subject claim of the access token.
+        When the operation is used by not-admin subject:
+          - the system returns `404 Not Found` if the Payer's RTP Service
+            Provider ID of the activation doesn't match the subject claim of
+            the access token;
+          - the system returns `403 Forbidden` if the provided value of Payer's
+            RTP Service doesn't match the subject claim of the access token.
       tags: [update]
       security:
         - oAuth2: [admin_rtp_activations, write_rtp_activations]
@@ -232,7 +234,7 @@ paths:
       description: |
         The operation deletes a RTP actviation searching it by its ID.
         
-        When the operation is used by not-admin subject, the solution returns
+        When the operation is used by not-admin subject, the system returns
         `404 Not Found` if the Payer's RTP Service Provider ID of the activation
         doesn't match the subject claim of the access token.
       tags: [delete]
@@ -278,7 +280,7 @@ paths:
       description: |
         The operation finds a RTP activation by its Payer ID.
         
-        When the operation is used by not-admin subject, the solution returns
+        When the operation is used by not-admin subject, the system returns
         the RTP activation only if its Payer's RTP Service Provider ID matches
         the subject claim of the access token, otherwise `404 Not Found` is
         returned.
