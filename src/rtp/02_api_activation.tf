@@ -4,8 +4,8 @@ resource "azurerm_api_management_api_version_set" "rtp_activation_api" {
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
-  display_name      = "RTP Activation API"
-  versioning_scheme = "Header"
+  display_name        = "RTP Activation API"
+  versioning_scheme   = "Header"
   version_header_name = "Version"
 }
 
