@@ -18,7 +18,10 @@ resource "azurerm_api_management_product_policy" "rtp_api_product" {
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
-  xml_content = file("./api_product/base_policy.xml")
+  xml_content = templatefile("./api_product/base_policy.xml", {
+    rtp_fe_origin = local.rtp_fe_origin,
+    dev_origin    = var.env_short != "d" ? "" : "\n<origin>http://localhost:1234</origin>"
+  })
 }
 
 resource "azurerm_api_management_group" "rtp_group" {
