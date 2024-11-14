@@ -12,6 +12,8 @@
 -->
 <policies>
     <inbound>
+        <base />
+        <include-fragment fragment-id="rtp-validate-token-mcshared" />
         <return-response>
             <set-status code="200" reason="OK" />
             <set-header name="Content-Type" exists-action="override">
