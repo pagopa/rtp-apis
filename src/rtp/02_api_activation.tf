@@ -41,6 +41,16 @@ resource "azurerm_api_management_product_api" "rtp_activation_product_api" {
   depends_on          = [azurerm_api_management_product.rtp, azurerm_api_management_api.rtp_activation_api]
 }
 
+## Define API Product Policy
+resource "azurerm_api_management_api_policy" "rtp_activation_product_policy" {
+  api_name            = azurerm_api_management_api.rtp_activation_api.name
+  api_management_name = data.azurerm_api_management.this.name
+  resource_group_name = data.azurerm_api_management.this.resource_group_name
+
+  xml_content = templatefile("./api/pagopa/activation_base_policy.xml", {})
+  depends_on  = [azurerm_api_management_policy_fragment.apim_rtp_validate_token]
+}
+
 ## Override API Operations Policies ##
 resource "azurerm_api_management_api_operation_policy" "rtp_activate_policy" {
   api_name            = azurerm_api_management_api.rtp_activation_api.name
@@ -48,7 +58,5 @@ resource "azurerm_api_management_api_operation_policy" "rtp_activate_policy" {
   resource_group_name = data.azurerm_api_management.this.resource_group_name
   operation_id        = "activate"
 
-  xml_content = templatefile("./api/pagopa/activation_policy.xml", {
-    base_url : "${local.rtp_base_url}/${azurerm_api_management_api.rtp_activation_api.path}/${azurerm_api_management_api.rtp_activation_api.version}/rtps"
-  })
+  xml_content = templatefile("./api/pagopa/activation_policy.xml", {})
 }
