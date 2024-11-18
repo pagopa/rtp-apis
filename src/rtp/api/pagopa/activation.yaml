@@ -443,7 +443,7 @@ components:
       pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
       minLength: 36
       maxLength: 36
-      example: "d0d654e6-97da-4848-b568-99fedccb642b"
+      example: "bd615b4a-066d-443e-8dd2-a28a39931fef"
 
     Version:
       description: Version of the required API.
