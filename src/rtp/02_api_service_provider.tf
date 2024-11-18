@@ -51,4 +51,6 @@ resource "azurerm_api_management_api_operation_policy" "rtp_service_provider_cre
   xml_content = templatefile("./api/pagopa/create_rtp_mock_policy.xml", {
     base_url : "${local.rtp_base_url}/${azurerm_api_management_api.rtp_service_provider_api.path}/${azurerm_api_management_api.rtp_service_provider_api.version}/rtps"
   })
+
+  depends_on = [azurerm_api_management_policy_fragment.apim_rtp_validate_token]
 }

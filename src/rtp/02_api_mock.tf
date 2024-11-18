@@ -45,6 +45,9 @@ resource "azurerm_api_management_api_operation_policy" "rtp_mock_create_ticket_p
     env = var.env
   })
 
-  depends_on = [azurerm_api_management_api_operation.rtp_mock_create_ticket]
+  depends_on = [
+    azurerm_api_management_api_operation.rtp_mock_create_ticket,
+    azurerm_api_management_policy_fragment.apim_rtp_validate_token
+  ]
 
 }
