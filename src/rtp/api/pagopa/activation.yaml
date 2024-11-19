@@ -573,7 +573,7 @@ components:
         effectiveActivationDate: "2024-10-30T16:39:34+01:00"
         payer:
           fiscalCode: "RSSMRA85T10A562S"
-          rtpSpId: "10987654321"
+          rtpSpId: "UNCRITMM"
 
     Activations:
       description: List of RTP activations.
