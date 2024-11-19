@@ -467,7 +467,7 @@ components:
 
     FiscalCode:
       description: |
-        Fiscal (or tax) code.
+        fiscal code.
         
         It is used as identifier of the Payer (P009) and of the Payee (E005).
       type: string
@@ -482,11 +482,12 @@ components:
         
         It is used as identifier of the Payer’s RTP Service Provider (N001) and
         for Payee’s RTP Service Provider (N002).
+        A Service Provider is identified by its BIC (Bank Identification Code) if it is a PSP, otherwise it is identified by its LEI (Legal Entity Identifier)
       type: string
       pattern: "^[ -~]{1,35}$"
       minLength: 1
       maxLength: 35
-      example: "12345678901"
+      example: "UNCRITMM"
 
     # --------------------------------------------------------------------------
     # Complex types for paging.
