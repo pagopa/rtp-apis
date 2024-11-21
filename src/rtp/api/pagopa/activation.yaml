@@ -724,7 +724,7 @@ components:
       name: Version
       in: header
       description: Version of the required API.
-      required: false
+      required: true
       schema:
         $ref: '#/components/schemas/Version'
 
