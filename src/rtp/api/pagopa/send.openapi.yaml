@@ -18,6 +18,8 @@ paths:
       operationId: "createRtp"
       summary: "Create and send a new RTP from a pagoPa notice"
       description: "Create and send a new RTP from a pagoPa notice"
+      security:
+        - oAuth2: [ admin_rtp_send, write_rtp_send ]
       requestBody:
         description: "pagoPa notice's details to create as RTP"
         required: true
