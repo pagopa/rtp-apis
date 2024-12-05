@@ -119,3 +119,19 @@ components:
         - payerId
         - payee
 
+  # ============================================================================
+  # Security schemes.
+  # ============================================================================
+  securitySchemes:
+    oAuth2:
+      description: |
+        A bearer token in the format of a JWS and conforms to the specifications
+        included in RFC8725.
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          refreshUrl: /token
+          scopes:
+            admin_rtp_send: Admin enabled to send RPTs.
+            write_rtp_send: Send RTPs.
