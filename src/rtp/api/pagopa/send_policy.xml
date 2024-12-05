@@ -11,26 +11,17 @@
     - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.
 -->
 <policies>
-    <inbound>
-        <base />
-        <set-variable name="uuid" value="@(Guid.NewGuid().ToString())"/>
-        <return-response>
-            <set-status code="200" reason="OK" />
-            <set-header name="Content-Type" exists-action="override">
-                <value>application/json</value>
-            </set-header>
-            <set-header name="Location" exists-action="override">
-                <value>@("${base_url}" + "/" + context.Variables["uuid"])</value>
-            </set-header>
-        </return-response>
-    </inbound>
-    <backend>
-        <base />
-    </backend>
-    <outbound>
-        <base />
-    </outbound>
-    <on-error>
-        <base />
-    </on-error>
+  <inbound>
+    <base />
+    <include-fragment fragment-id="rtp-validate-token-mcshared" />
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
 </policies>

@@ -25,9 +25,11 @@ resource "azurerm_api_management_api" "rtp_service_provider_api" {
 
   depends_on = [azurerm_api_management_product.rtp]
 
+  service_url = "https://${local.product}-rtp-activator-ca.${data.azurerm_container_app_environment.cae.default_domain}"
+
   import {
     content_format = "openapi"
-    content_value  = templatefile("./api/pagopa/openapi.yaml", {})
+    content_value  = templatefile("./api/pagopa/send.openapi.yaml", {})
   }
 }
 
@@ -48,9 +50,7 @@ resource "azurerm_api_management_api_operation_policy" "rtp_service_provider_cre
   resource_group_name = azurerm_api_management_api.rtp_service_provider_api.resource_group_name
   operation_id        = "createRtp"
 
-  xml_content = templatefile("./api/pagopa/create_rtp_mock_policy.xml", {
-    base_url : "${local.rtp_base_url}/${azurerm_api_management_api.rtp_service_provider_api.path}/${azurerm_api_management_api.rtp_service_provider_api.version}/rtps"
-  })
+  xml_content = file("./api/pagopa/send_policy.xml")
 
   depends_on = [azurerm_api_management_policy_fragment.apim_rtp_validate_token]
 }
