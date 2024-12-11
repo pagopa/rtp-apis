@@ -50,7 +50,9 @@ resource "azurerm_api_management_api_operation_policy" "rtp_service_provider_cre
   resource_group_name = azurerm_api_management_api.rtp_service_provider_api.resource_group_name
   operation_id        = "createRtp"
 
-  xml_content = file("./api/pagopa/send_policy.xml")
+  xml_content = templatefile("./api/pagopa/send_policy.xml", {
+    enableAuth = var.enable_auth_send
+  })
 
   depends_on = [azurerm_api_management_policy_fragment.apim_rtp_validate_token]
 }
