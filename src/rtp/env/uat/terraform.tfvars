@@ -16,3 +16,5 @@ tags = {
 }
 
 dns_zone_prefix = "uat.cstar.pagopa.it"
+
+enable_auth_send = false

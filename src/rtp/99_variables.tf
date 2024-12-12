@@ -53,3 +53,9 @@ variable "dns_zone_prefix" {
   type        = string
   description = "The DNS zone prefix e.g. dev.cstar.pagopa.it"
 }
+
+variable "enable_auth_send" {
+  type        = bool
+  description = "Enable auth on RTP send API"
+  default     = true
+}
