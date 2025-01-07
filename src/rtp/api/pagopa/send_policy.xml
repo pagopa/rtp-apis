@@ -15,9 +15,9 @@
     <base />
     <choose>
       <when condition="${enableAuth}">
-      <include-fragment fragment-id="rtp-validate-token-mcshared" />
-    </when>
-  </choose>
+        <include-fragment fragment-id="rtp-validate-token-mcshared" />
+      </when>
+    </choose>
   </inbound>
   <backend>
     <base />
