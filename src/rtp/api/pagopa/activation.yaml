@@ -11,13 +11,13 @@ info:
 
 servers:
   - description: Development/Test
-    url: https://rtp.dev.cstar.pagopa.it
+    url: https://api-rtp.dev.cstar.pagopa.it/rtp/activation
     x-internal: true
   - description: User Acceptance Test
-    url: https://rtp.uat.cstar.pagopa.it
+    url: https://api-rtp.uat.cstar.pagopa.it/rtp/activation
     x-internal: false
   - description: Production
-    url: https://rtp.cstar.pagopa.it
+    url: https://api-rtp.cstar.pagopa.it/rtp/activation
     x-internal: false
     
 tags:
