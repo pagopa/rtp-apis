@@ -6,7 +6,15 @@ info:
   contact:
     email: cstar@pagopa.it
 servers:
-  - url: http://localhost:8080
+  - description: Development/Test
+    url: https://api-rtp.dev.cstar.pagopa.it/rtp/v1
+    x-internal: true
+  - description: User Acceptance Test
+    url: https://api-rtp.uat.cstar.pagopa.it/rtp/v1
+    x-internal: false
+  - description: Production
+    url: https://api-rtp.cstar.pagopa.it/rtp/v1
+    x-internal: false
 tags:
   - name: rtps
     description: API Group aims to notify a pagoPa notice through Request To Pay (RTP)
@@ -18,10 +26,10 @@ paths:
       operationId: "createRtp"
       parameters:
         - $ref: '#/components/parameters/Version'
-      security:
-        - oAuth2: [ admin_rtp_send, write_rtp_send ]
       summary: "Create and send a new RTP from a pagoPa notice"
       description: "Create and send a new RTP from a pagoPa notice"
+      security:
+        - oAuth2: [ admin_rtp_send, write_rtp_send ]
       requestBody:
         description: "pagoPa notice's details to create as RTP"
         required: true
