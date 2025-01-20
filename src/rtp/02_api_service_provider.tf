@@ -4,8 +4,9 @@ resource "azurerm_api_management_api_version_set" "rtp_service_provider_api" {
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
-  display_name      = "RTP Service Provider API"
-  versioning_scheme = "Segment"
+  display_name        = "RTP Service Provider API"
+  versioning_scheme   = "Header"
+  version_header_name = "Version"
 }
 
 resource "azurerm_api_management_api" "rtp_service_provider_api" {
