@@ -6,15 +6,7 @@ info:
   contact:
     email: cstar@pagopa.it
 servers:
-  - description: Development/Test
-    url: https://api-rtp.dev.cstar.pagopa.it/rtp/v1
-    x-internal: true
-  - description: User Acceptance Test
-    url: https://api-rtp.uat.cstar.pagopa.it/rtp/v1
-    x-internal: false
-  - description: Production
-    url: https://api-rtp.cstar.pagopa.it/rtp/v1
-    x-internal: false
+  - url: http://localhost:8080
 tags:
   - name: rtps
     description: API Group aims to notify a pagoPa notice through Request To Pay (RTP)
@@ -24,10 +16,12 @@ paths:
       tags:
         - rtps
       operationId: "createRtp"
-      summary: "Create and send a new RTP from a pagoPa notice"
-      description: "Create and send a new RTP from a pagoPa notice"
+      parameters:
+        - $ref: '#/components/parameters/Version'
       security:
         - oAuth2: [ admin_rtp_send, write_rtp_send ]
+      summary: "Create and send a new RTP from a pagoPa notice"
+      description: "Create and send a new RTP from a pagoPa notice"
       requestBody:
         description: "pagoPa notice's details to create as RTP"
         required: true
@@ -44,6 +38,12 @@ paths:
               description: "The location of created rtp"
               schema:
                 $ref: "#/components/schemas/RtpLocation"
+        "400":
+          description: "The request is malformed"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MalformedRequestErrorResponse'
         "422":
           description: "The debtor is not activated by the Service Provider"
           content:
@@ -84,7 +84,7 @@ components:
         - payeeId
         - name
         - payTrxRef
-
+  
     Payer:
       type: object
       properties:
@@ -102,7 +102,7 @@ components:
     PaymentNotice:
       type: object
       properties:
-        noticeNumber:          
+        noticeNumber:
           $ref: "#/components/schemas/NoticeNumber"
         amount:
           $ref: "#/components/schemas/AmountEuroCents"
@@ -128,10 +128,10 @@ components:
 
     PayerId:
       type: string
-      pattern: "^(([A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z])|(\\d{11}))$"
       description: "The id of the recipient of the request to pay. The id is the fiscal code"
+      pattern: "^(([A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z])|(\\d{11}))$"
       example: "ABCDEF12G34H567I"
-          
+
     PayeeId:
       type: string
       pattern: "\\d{11}|\\d{16}"
@@ -171,6 +171,16 @@ components:
         - paymentNotice
         - payer
         - payee
+  
+    MalformedRequestErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Malformed request"
+        details:
+          type: string
+          example: "The request is malformed. Please check the request's body and try again."
 
     MismatchActivationErrorResponse:
       type: object
@@ -181,20 +191,22 @@ components:
         details:
           type: string
           example: "The debtor's fiscal code provided is not activated by thr subject making the request."
+    
+    Version:
+      description: Version of the required API.
+      type: string
+      pattern: "^[ -~]{1,64}$"
+      minLength: 1
+      maxLength: 64
+      example: "v1"
 
-  # ============================================================================
-  # Security schemes.
-  # ============================================================================
-  securitySchemes:
-    oAuth2:
-      description: |
-        A bearer token in the format of a JWS and conforms to the specifications
-        included in RFC8725.
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: /token
-          refreshUrl: /token
-          scopes:
-            admin_rtp_send: Admin enabled to send RPTs.
-            write_rtp_send: Send RTPs.
+
+  parameters:
+
+    Version:
+      name: Version
+      in: header
+      description: Version of the required API.
+      required: false
+      schema:
+        $ref: '#/components/schemas/Version'
