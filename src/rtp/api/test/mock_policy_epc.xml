@@ -13,12 +13,24 @@
 <policies>
   <inbound>
     <base/>
-    <return-response>
-      <set-status code="200" reason="OK"/>
-      <set-header name="Content-Type" exists-action="override">
-        <value>application/json</value>
-      </set-header>
-    </return-response>
+    <choose>
+      <when condition="@(context.Request.Body.As<String>(preserveContent: true).Contains(&quot;RSSMRA85T10X000D&quot;))">
+        <return-response>
+          <set-status code="400" reason="Bad Request"/>
+          <set-header name="Content-Type" exists-action="override">
+            <value>application/json</value>
+          </set-header>
+        </return-response>
+      </when>
+      <otherwise>
+        <return-response>
+          <set-status code="200" reason="OK"/>
+          <set-header name="Content-Type" exists-action="override">
+            <value>application/json</value>
+          </set-header>
+        </return-response>
+      </otherwise>
+    </choose>
   </inbound>
   <backend>
     <base/>
