@@ -487,8 +487,8 @@ components:
         Value Added Tax is an identification number allocated to a party.
       type: string
       pattern: "^[0-9]{11}$"
-      minLength: 20
-      maxLength: 20
+      minLength: 11
+      maxLength: 11
       example: "12345678911"
 
     PartyId:
