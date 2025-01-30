@@ -589,7 +589,7 @@ components:
         effectiveActivationDate: "2024-10-30T16:39:34+01:00"
         payer:
           fiscalCode: "RSSMRA85T10A562S"
-          rtpSpId: "984500A9EB6B07AC2G71"
+          rtpSpId: "12345678911"
 
     Activations:
       description: List of RTP activations.
@@ -603,7 +603,7 @@ components:
           effectiveActivationDate: "2024-10-30T16:39:34+01:00"
           payer:
             fiscalCode: "RSSMRA85T10A562S"
-            rtpSpId: "984500A9EB6B07AC2G71"
+            rtpSpId: "12345678911"
 
     ActivationReq:
       description: |
@@ -618,7 +618,7 @@ components:
       example:
         payer:
           fiscalCode: "RSSMRA85T10A562S"
-          rtpSpId: "984500A9EB6B07AC2G71"
+          rtpSpId: "12345678911"
   
     PageOfActivations:
       description: Page of RTP activations.
@@ -638,7 +638,7 @@ components:
             effectiveActivationDate: "2024-10-30T16:39:34+01:00"
             payer:
               fiscalCode: "RSSMRA85T10A562S"
-              rtpSpId: "984500A9EB6B07AC2G71"
+              rtpSpId: "12345678911"
         page:
           totalElements: 2
           totalPages: 2
@@ -660,7 +660,7 @@ components:
         - rtpSpId
       example:
         fiscalCode: "RSSMRA85T10A562S"
-        rtpSpId: "984500A9EB6B07AC2G71"
+        rtpSpId: "12345678911"
 
   # ============================================================================
   # Request bodies.
