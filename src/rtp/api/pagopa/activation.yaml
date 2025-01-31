@@ -482,15 +482,14 @@ components:
       maxLength: 16
       example: "RSSMRA85T10A562S"
 
-    Lei:
+    Vat:
       description: |
-        Legal Entity Identifier is a code allocated to a party as described in
-        ISO 17442 "Financial Services - Legal Entity Identifier (LEI)".
+        Value Added Tax is an identification number allocated to a party.
       type: string
-      pattern: "^[A-Z0-9]{18}[0-9]{2}$"
-      minLength: 20
-      maxLength: 20
-      example: "984500A9EB6B07AC2G71"
+      pattern: "^[0-9]{11}$"
+      minLength: 11
+      maxLength: 11
+      example: "12345678911"
 
     PartyId:
       description: |
@@ -500,11 +499,11 @@ components:
         for Payee’s RTP Service Provider (N002).
         
         A Service Provider is identified by its BIC (Bank Identification Code)
-        if it is a PSP, otherwise it is identified by its LEI (Legal Entity
-        Identifier).
+        if it is a PSP, otherwise it is identified by its VAT identification number 
+        (Value Added Tax id).
       oneOf:
         - $ref: '#/components/schemas/Bic'
-        - $ref: '#/components/schemas/Lei'
+        - $ref: '#/components/schemas/Vat'
 
     # --------------------------------------------------------------------------
     # Complex types for paging.
@@ -590,7 +589,7 @@ components:
         effectiveActivationDate: "2024-10-30T16:39:34+01:00"
         payer:
           fiscalCode: "RSSMRA85T10A562S"
-          rtpSpId: "984500A9EB6B07AC2G71"
+          rtpSpId: "12345678911"
 
     Activations:
       description: List of RTP activations.
@@ -604,7 +603,7 @@ components:
           effectiveActivationDate: "2024-10-30T16:39:34+01:00"
           payer:
             fiscalCode: "RSSMRA85T10A562S"
-            rtpSpId: "984500A9EB6B07AC2G71"
+            rtpSpId: "12345678911"
 
     ActivationReq:
       description: |
@@ -619,7 +618,7 @@ components:
       example:
         payer:
           fiscalCode: "RSSMRA85T10A562S"
-          rtpSpId: "984500A9EB6B07AC2G71"
+          rtpSpId: "12345678911"
   
     PageOfActivations:
       description: Page of RTP activations.
@@ -639,7 +638,7 @@ components:
             effectiveActivationDate: "2024-10-30T16:39:34+01:00"
             payer:
               fiscalCode: "RSSMRA85T10A562S"
-              rtpSpId: "984500A9EB6B07AC2G71"
+              rtpSpId: "12345678911"
         page:
           totalElements: 2
           totalPages: 2
@@ -661,7 +660,7 @@ components:
         - rtpSpId
       example:
         fiscalCode: "RSSMRA85T10A562S"
-        rtpSpId: "984500A9EB6B07AC2G71"
+        rtpSpId: "12345678911"
 
   # ============================================================================
   # Request bodies.
