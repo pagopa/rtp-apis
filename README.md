@@ -16,29 +16,11 @@ The Request to Pay (RTP) system allows creditors to submit payment requests to d
 │   └── terraform_run_all.sh
 └── src
     └── rtp
-        ├── 00_data.tf
-        ├── 01_apim_core.tf
-        ├── 01_apim_fragments.tf
-        ├── 02_api_activation.tf
-        ├── 02_api_mock.tf
-        ├── 02_api_service_provider.tf
-        ├── 99_locals.tf
-        ├── 99_main.tf
-        ├── 99_variables.tf
         ├── api
         │   ├── pagopa
-        │   │   ├── EPC133-22_v3.1_SRTP_spec.openapi.yaml
-        │   │   ├── activation.yaml
-        │   │   ├── activation_base_policy.xml
-        │   │   ├── activation_policy.xml
-        │   │   ├── send.openapi.yaml
-        │   │   └── send_policy.xml
         │   └── test
-        │       └── mock_policy_epc.xml
         ├── api_fragment
-        │   └── validate-token-mcshared.xml
         ├── api_product
-        │   └── base_policy.xml
         ├── env
         │   ├── dev
         │   │   ├── backend.ini
