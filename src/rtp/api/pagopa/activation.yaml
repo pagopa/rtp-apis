@@ -539,15 +539,15 @@ components:
       type: object
       additionalProperties: false
       properties:
-        statusCode:
+        code:
           $ref: '#/components/schemas/ErrorCode'
         description:
           $ref: '#/components/schemas/ErrorDescription'
       required:
-        - statusCode
+        - code
         - description
       example:
-        statusCode: "01000000F"
+        code: "01000000F"
         description: "Wrong party identifier"
 
     Errors:
@@ -565,7 +565,7 @@ components:
         - errors
       example:
         errors:
-          - statusCode: "01000000F"
+          - code: "01000000F"
             description: "Wrong party identifier"
 
     SyntheticError:
@@ -573,15 +573,15 @@ components:
       type: object
       additionalProperties: false
       properties:
-        statusCode:
+        code:
           $ref: '#/components/schemas/ErrorCode'
         description:
           $ref: '#/components/schemas/ErrorDescription'
       required:
-        - statusCode
+        - code
         - description
       example:
-        statusCode: "01000000F"
+        code: "01000000F"
         description: "Invalid JWT."
 
     GenericError:
