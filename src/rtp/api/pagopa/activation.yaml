@@ -581,7 +581,7 @@ components:
         - statusCode
         - description
       example:
-        statusCode: "401"
+        statusCode: "01000000F"
         description: "Invalid JWT."
 
     GenericError:
