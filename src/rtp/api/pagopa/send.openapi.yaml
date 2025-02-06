@@ -27,7 +27,7 @@ paths:
       description: "Create and send a new RTP from a pagoPa notice"
       tags: [rtps]
       security:
-        - oAuth2: [ admin_rtp_send, write_rtp_send ]
+        - oAuth2: [admin_rtp_send, write_rtp_send]
       parameters:
         - $ref: '#/components/parameters/Version'
       requestBody:
@@ -140,7 +140,7 @@ components:
       example: "ABC/124"
 
     RtpId:
-      type: string
+      type: string  
       format: uuid
       description: "Request to pay unique id"
 
