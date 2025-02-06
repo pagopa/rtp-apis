@@ -404,6 +404,12 @@ components:
       minLength: 9
       maxLength: 9
       example: "01000000F"
+    
+    ErrorCodeApim:
+      description: Error code.
+      type: integer
+      format: int32
+      example: 401
 
     ErrorDescription:
       description: Error description.
@@ -573,16 +579,16 @@ components:
       type: object
       additionalProperties: false
       properties:
-        code:
-          $ref: '#/components/schemas/ErrorCode'
-        description:
+        statusCode:
+          $ref: '#/components/schemas/ErrorCodeApim'
+        message:
           $ref: '#/components/schemas/ErrorDescription'
       required:
-        - code
-        - description
+        - statusCode
+        - message
       example:
-        code: "01000000F"
-        description: "Invalid JWT."
+        statusCode: 401
+        message: "Invalid JWT."
 
     GenericError:
       description: Generic error.
