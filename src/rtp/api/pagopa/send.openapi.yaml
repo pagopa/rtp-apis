@@ -1,7 +1,8 @@
 openapi: 3.0.3
 info:
   title: pagoPa RTP - OpenAPI 3.x
-  description: DESCRIPTION
+  description: The API is designed for creating and sending payment requests through 
+    the pagoPa system, with strict validation to ensure data integrity.
   version: 0.0.1
   contact:
     email: cstar@pagopa.it
@@ -21,43 +22,26 @@ tags:
 paths:
   /rtps:
     post:
-      tags:
-        - rtps
-      operationId: "createRtp"
-      parameters:
-        - $ref: '#/components/parameters/Version'
-      security:
-        - oAuth2: [ admin_rtp_send, write_rtp_send ]
+      operationId: createRtp
       summary: "Create and send a new RTP from a pagoPa notice"
       description: "Create and send a new RTP from a pagoPa notice"
+      tags: [rtps]
+      security:
+        - oAuth2: [ admin_rtp_send, write_rtp_send ]
+      parameters:
+        - $ref: '#/components/parameters/Version'
       requestBody:
-        description: "pagoPa notice's details to create as RTP"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateRtp"
+          $ref: '#/components/requestBodies/CreateRtp'
       responses:
         "201":
-          description: "Request to pay created and sent"
-          headers:
-            Location:
-              required: true
-              description: "The location of created rtp"
-              schema:
-                $ref: "#/components/schemas/RtpLocation"
+          #description: Created.
+          $ref: '#/components/responses/RTPCreatedAndSent'
         "400":
-          description: "The request is malformed"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MalformedRequestErrorResponse'
+          #description: Malformed request.
+          $ref: '#/components/responses/MalformedError'
         "422":
-          description: "The debtor is not activated by the Service Provider"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MismatchActivationErrorResponse'
+          #description: Mismatch request.
+          $ref: '#/components/responses/MismatchError'
 
 components:
   schemas:
@@ -209,12 +193,50 @@ components:
       example: "v1"
 
 
-  parameters:
+  # ============================================================================
+  # Request bodies.
+  # ============================================================================
+  requestBodies:
+    CreateRtp:
+      description: Request to create or update a RTP activation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateRtp'
 
+
+  # ============================================================================
+  # Responses
+  # ============================================================================
+  responses:
+    RTPCreatedAndSent:
+      description: "Request to pay created and sent"
+      headers:
+        Location:
+          required: true
+          description: "The location of created rtp"
+          schema:
+            $ref: "#/components/schemas/RtpLocation"
+
+    MalformedError:
+      description: "The request is malformed"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MalformedRequestErrorResponse'
+
+    MismatchError:
+      description: "The debtor is not activated by the Service Provider"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MismatchActivationErrorResponse'
+
+  parameters:
     Version:
       name: Version
       in: header
       description: Version of the required API.
-      required: false
+      required: true
       schema:
         $ref: '#/components/schemas/Version'
