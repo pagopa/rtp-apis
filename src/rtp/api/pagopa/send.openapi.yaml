@@ -7,13 +7,13 @@ info:
     email: cstar@pagopa.it
 servers:
   - description: Development/Test
-    url: https://api-rtp.dev.cstar.pagopa.it/rtp/v1
+    url: https://api-rtp.dev.cstar.pagopa.it/rtp
     x-internal: true
   - description: User Acceptance Test
-    url: https://api-rtp.uat.cstar.pagopa.it/rtp/v1
+    url: https://api-rtp.uat.cstar.pagopa.it/rtp
     x-internal: false
   - description: Production
-    url: https://api-rtp.cstar.pagopa.it/rtp/v1
+    url: https://api-rtp.cstar.pagopa.it/rtp
     x-internal: false
 tags:
   - name: rtps
