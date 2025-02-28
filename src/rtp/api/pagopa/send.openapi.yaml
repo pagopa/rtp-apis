@@ -61,6 +61,9 @@ paths:
         "415":
           #description: Unsupported media type. Did you provide application/json?
           $ref: '#/components/responses/Error'
+        "422":
+          #description: Error received from Service Provider?
+          $ref: '#/components/responses/Error'
         "429":
           #description: Too many request.
           $ref: '#/components/responses/Error'
