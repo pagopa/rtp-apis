@@ -15,7 +15,7 @@ resource "azurerm_api_management_api" "rtp_mock_api_epc" {
 
   import {
     content_format = "openapi"
-    content_value  = templatefile("./api/pagopa/EPC133-22_v3.1_SRTP_spec.openapi.yaml", {})
+    content_value  = templatefile("./api/epc/EPC133-22_v3.1_SRTP_spec.openapi.yaml", {})
   }
 }
 
