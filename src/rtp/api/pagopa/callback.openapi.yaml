@@ -17,7 +17,7 @@ servers:
     url: https://api-rtp-cb.cstar.pagopa.it/rtp/cb
     x-internal: false
 paths:
-  /send-callback:
+  /send:
     post:
       summary: 'Forwarding of a SEPA Request-To-Pay Response to the Payee''s SRTP Service Provider'
       description: |
@@ -35,6 +35,8 @@ paths:
       responses:
         200:
           description: The callback server accepts the callback
+        403:
+          description: The caller is not authorized to perform the operation
         400:
           description: Bad Request
 components:
