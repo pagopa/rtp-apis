@@ -8,16 +8,16 @@ info:
     email: cstar@pagopa.it
 servers:
   - description: Development/Test
-    url: https://api-rtp.dev.cstar.pagopa.it/rtp
+    url: https://api-rtp-cb.dev.cstar.pagopa.it/rtp/cb
     x-internal: true
   - description: User Acceptance Test
-    url: https://api-rtp.uat.cstar.pagopa.it/rtp
+    url: https://api-rtp-cb.uat.cstar.pagopa.it/rtp/cb
     x-internal: false
   - description: Production
-    url: https://api-rtp.cstar.pagopa.it/rtp
+    url: https://api-rtp-cb.cstar.pagopa.it/rtp/cb
     x-internal: false
 paths:
-  /sendCallback:
+  /send-callback:
     post:
       summary: 'Forwarding of a SEPA Request-To-Pay Response to the Payee''s SRTP Service Provider'
       description: |
