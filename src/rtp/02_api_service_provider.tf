@@ -34,7 +34,6 @@ resource "azurerm_api_management_api" "rtp_service_provider_api" {
   }
 }
 
-
 resource "azurerm_api_management_product_api" "rtp_service_provider_product_api" {
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
