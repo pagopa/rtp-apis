@@ -25,6 +25,8 @@ paths:
         to the Payee's SRTP-SP through the callback URL provided during the initial request.
         
         Sections 2.2, 2.3, 2.5 & 2.6 in SRTP Implementation guidelines 3.0
+      operationId: sendCallback
+      tags: [sendCallback]
       requestBody:
         description: ISO20022 based SEPA Request-To-Pay Response
         content:
@@ -33,12 +35,15 @@ paths:
               $ref: '#/components/schemas/AsynchronousSepaRequestToPayResponseResource'
         required: true
       responses:
-        200:
+        "200":
           description: The callback server accepts the callback
-        403:
+        "403":
           description: The caller is not authorized to perform the operation
-        400:
+          $ref: '#/components/responses/Unauthorized'
+        "400":
           description: Bad Request
+          $ref: '#/components/responses/BadRequest'
+
 components:
   schemas:
     SynchronousSepaRequestToPayErrorResponse:
