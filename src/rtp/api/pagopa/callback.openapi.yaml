@@ -16,6 +16,12 @@ servers:
   - description: Production
     url: https://api-rtp-cb.cstar.pagopa.it/rtp/cb
     x-internal: false
+
+
+tags:
+  - name: callback
+    description: API Group aims to get the callback.
+
 paths:
   /send:
     post:
@@ -26,7 +32,7 @@ paths:
         
         Sections 2.2, 2.3, 2.5 & 2.6 in SRTP Implementation guidelines 3.0
       operationId: sendCallback
-      tags: [sendCallback]
+      tags: [callback]
       requestBody:
         description: ISO20022 based SEPA Request-To-Pay Response
         content:
