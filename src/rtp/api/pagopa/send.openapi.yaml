@@ -74,6 +74,52 @@ paths:
           #description: Unexpected error.
           $ref: '#/components/responses/Error'
 
+  /rtps/{rtpId}:
+    patch:
+      operationId: updateRtp
+      summary: Updates a RTP.
+      description: The operation updates a RTP searching it by its ID.
+      tags: [rtps]
+      security:
+        - oAuth2: [admin_rtp_send, write_rtp_send]
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/RtpId'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateRtp'
+      responses:
+        "204":
+          #description: No content
+          $ref: '#/components/responses/NoContent'
+        "400":
+          #description: Bad request
+          $ref: '#/components/responses/Error'
+        "401":
+          #description: Wrong credentials
+          $ref: '#/components/responses/Error'
+        "403":
+          #description: Forbidden
+          $ref: '#/components/responses/Error'
+        "404":
+          #description: Not found
+          $ref: '#/components/responses/Error'
+        "406":
+          #description: Not acceptable. Did you require application/json?
+          $ref: '#/components/responses/Error'
+        "415":
+          #description: Unsupported media type. Did you provide application/json?
+          $ref: '#/components/responses/Error'
+        "429":
+          #description: Too many request
+          $ref: '#/components/responses/Error'
+        "500":
+          #description: Server error
+          $ref: '#/components/responses/Error'
+        default:
+          #description: Unexpected error
+          $ref: '#/components/responses/Error'     
+
 components:
   schemas:
     # --------------------------------------------------------------------------
@@ -244,7 +290,7 @@ components:
         requestId: "3fb00d0f-416"
 
     # --------------------------------------------------------------------------
-    # Domain specific basic types.
+    # Domain specific types.
     # --------------------------------------------------------------------------
     AmountEuroCents:
       description: Amount of pagoPA notice, in euro cents.
@@ -362,6 +408,15 @@ components:
       description: The Pay Transaction Reference.
       example: "ABC/124"
 
+    RtpId:
+      description: Identifier of the RTP activation resource.
+      type: string
+      format: uuid
+      pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+      minLength: 36
+      maxLength: 36
+      example: "d0d654e6-97da-4848-b568-99fedccb642b"
+      
     RtpLocation:
       type: string
       description: The location of created resource.
@@ -385,6 +440,26 @@ components:
         - paymentNotice
         - payer
         - payee
+
+    Status:
+      description: RTP status.
+      type: string
+      enum:
+        - CREATED
+        - SENT
+        - CANCELLED
+        - CANCELLATION_SENT
+      example: "CANCELLED"
+
+    UpdateRtp:
+      description: Request to update a RTP.
+      type: object
+      additionalProperties: false
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+      example:
+        status: "CANCELLED"
 
     # --------------------------------------------------------------------------
     # Basic types for technical stuff.
@@ -411,11 +486,18 @@ components:
   # ============================================================================
   requestBodies:
     CreateRtp:
-      description: Request to create or update a RTP activation.
+      description: Request to create a RTP.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateRtp'
+
+    UpdateRtp:
+      description: Request to update a RTP.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateRtp'
 
   # ============================================================================
   # Responses
@@ -489,6 +571,33 @@ components:
             pattern: "^[ -~]{0,65535}$"
             maxLength: 65535
 
+    NoContent:
+      description: Response returned when there isn't a content to return.
+      headers:
+        Access-Control-Allow-Origin:
+          description: |
+            Indicates whether the response can be shared with requesting code
+            from the given origin.
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessControlAllowOrigin'
+        RateLimit-Limit:
+          description: The number of allowed requests in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitLimit'
+        RateLimit-Reset:
+          description: The number of seconds left in the current period
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitReset'
+        Retry-After:
+          description: |
+            The number of seconds to wait before allowing a follow-up request.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RetryAfter'
+
   # ============================================================================
   # Parameters.
   # ============================================================================
@@ -500,7 +609,15 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/RequestId'
-
+        
+    RtpId:
+      name: rtpId
+      in: path
+      description: Identifier of a RTP.
+      required: true
+      schema:
+        $ref: '#/components/schemas/RtpId'
+        
     Version:
       name: Version
       in: header
