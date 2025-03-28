@@ -70,15 +70,18 @@ paths:
         "500":
           #description: Server error.
           $ref: '#/components/responses/Error'
+        "504":
+          #description: Timeout communicating with Debtor Service Provider
+          $ref: '#/components/responses/Error'
         default:
           #description: Unexpected error.
           $ref: '#/components/responses/Error'
 
-  /rtps/{rtpId}:
-    patch:
-      operationId: updateRtp
-      summary: Updates a RTP.
-      description: The operation updates a RTP searching it by its ID.
+  /rtps/{rtpId}/cancel:
+    post:
+      operationId: cancelRtp
+      summary: Cancels a RTP.
+      description: The operation cancels a RTP searching it by its ID.
       tags: [rtps]
       security:
         - oAuth2: [admin_rtp_send, write_rtp_send]
@@ -86,8 +89,6 @@ paths:
         - $ref: '#/components/parameters/RequestId'
         - $ref: '#/components/parameters/Version'
         - $ref: '#/components/parameters/RtpId'
-      requestBody:
-        $ref: '#/components/requestBodies/UpdateRtp'
       responses:
         "204":
           #description: No content
@@ -107,14 +108,14 @@ paths:
         "406":
           #description: Not acceptable. Did you require application/json?
           $ref: '#/components/responses/Error'
-        "415":
-          #description: Unsupported media type. Did you provide application/json?
-          $ref: '#/components/responses/Error'
         "429":
           #description: Too many request
           $ref: '#/components/responses/Error'
         "500":
           #description: Server error
+          $ref: '#/components/responses/Error'
+        "504":
+          #description: Timeout communicating with Debtor Service Provider
           $ref: '#/components/responses/Error'
         default:
           #description: Unexpected error
@@ -441,26 +442,6 @@ components:
         - payer
         - payee
 
-    Status:
-      description: RTP status.
-      type: string
-      enum:
-        - CREATED
-        - SENT
-        - CANCELLED
-        - CANCELLATION_SENT
-      example: "CANCELLED"
-
-    UpdateRtp:
-      description: Request to update a RTP.
-      type: object
-      additionalProperties: false
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-      example:
-        status: "CANCELLED"
-
     # --------------------------------------------------------------------------
     # Basic types for technical stuff.
     # --------------------------------------------------------------------------
@@ -492,25 +473,18 @@ components:
           schema:
             $ref: '#/components/schemas/CreateRtp'
 
-    UpdateRtp:
-      description: Request to update a RTP.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateRtp'
-
   # ============================================================================
   # Responses
   # ============================================================================
   responses:
     RTPCreatedAndSent:
-      description: "Request to pay created and sent"
+      description: Request to pay created and sent.
       headers:
         Location:
           required: true
-          description: "The location of created rtp"
+          description: The location of created RTP.
           schema:
-            $ref: "#/components/schemas/RtpLocation"
+            $ref: '#/components/schemas/RtpLocation'
         Access-Control-Allow-Origin:
           description: |
             Indicates whether the response can be shared with requesting code
