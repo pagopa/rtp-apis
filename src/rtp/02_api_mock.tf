@@ -35,3 +35,12 @@ resource "azurerm_api_management_api_operation_policy" "rtp_mock_send_srtp" {
 
   xml_content = file("./api/test/mock_policy_epc.xml")
 }
+
+resource "azurerm_api_management_api_operation_policy" "rtp_mock_cancellation_srtp" {
+  api_name            = azurerm_api_management_api.rtp_mock_api_epc.name
+  api_management_name = azurerm_api_management_api.rtp_mock_api_epc.api_management_name
+  resource_group_name = azurerm_api_management_api.rtp_mock_api_epc.resource_group_name
+  operation_id        = "postRequestToPayCancellationRequest"
+
+  xml_content = file("./api/test/mock_policy_epc.xml")
+}
