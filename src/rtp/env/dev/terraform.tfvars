@@ -19,4 +19,4 @@ dns_zone_prefix = "dev.cstar.pagopa.it"
 
 enable_auth_send = true
 
-enable_api_diagnostics = false
+enable_api_diagnostics = true
