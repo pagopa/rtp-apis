@@ -59,3 +59,9 @@ variable "enable_auth_send" {
   description = "Enable auth on RTP send API"
   default     = true
 }
+
+variable "enable_api_diagnostics" {
+  description = "Flag to enable or disable API Management API diagnostics"
+  type        = bool
+  default     = false
+}

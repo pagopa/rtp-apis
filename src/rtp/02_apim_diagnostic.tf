@@ -1,9 +1,9 @@
 locals {
-  rtp_apim_api_diagnostics = [
+  rtp_apim_api_diagnostics = var.enable_api_diagnostics ? [
     azurerm_api_management_api_version_set.rtp_activation_api.name,
     azurerm_api_management_api_version_set.rtp_service_provider_api.name,
     azurerm_api_management_api_version_set.rtp_callback_api.name,
-  ]
+  ] : []
 }
 
 resource "azurerm_api_management_api_diagnostic" "rtp_apim_api_diagnostics" {

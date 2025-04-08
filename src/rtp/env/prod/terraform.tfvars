@@ -18,3 +18,5 @@ tags = {
 dns_zone_prefix = "cstar.pagopa.it"
 
 enable_auth_send = true
+
+enable_api_diagnostics = true
