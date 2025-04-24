@@ -65,7 +65,11 @@ paths:
             - 02021007F: Invalid subject format
             - 02021008F: Invalid expiryDate format
             - 02021009F: Required header missing
-          $ref: '#/components/responses/Error'
+          
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
         "401":
           description: |
             Wrong credentials.
@@ -75,7 +79,10 @@ paths:
             - 02011001F: Invalid token format
             - 02011002F: Expired token
             - 02011003F: Invalid signature
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "403":
           description: |
             Forbidden.
@@ -84,14 +91,20 @@ paths:
             - 02011004F: Insufficient permissions
             - 02011005F: Invalid scope
             - 02011006F: Account suspended
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "406":
           description: |
             Not acceptable. Did you require application/json?
             
             Possible error codes:
             - 02021010F: Unsupported accept header
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "409":
           description: |
             Conflict.
@@ -99,7 +112,10 @@ paths:
             Possible error codes:
             - 02031000F: Notice already processed
             - 02031001F: Duplicate request
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "415":
           description: |
             Unsupported media type. Did you provide application/json?
@@ -107,7 +123,10 @@ paths:
             Possible error codes:
             - 02021011F: Unsupported content type
             - 02021012F: Invalid content encoding
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "422":
           description: |
             Unprocessable Entity. Error received from Service Provider.
@@ -117,7 +136,10 @@ paths:
             - 02031003F: Invalid payment notice
             - 02031004F: Expired payment notice
             - 02031005F: Business rule violation
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "429":
           description: |
             Too many requests.
@@ -125,7 +147,10 @@ paths:
             Possible error codes:
             - 02051000F: Rate limit exceeded
             - 02051001F: Quota exceeded
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "500":
           description: |
             Server error.
@@ -134,7 +159,10 @@ paths:
             - 02091000F: Internal server error
             - 02091001F: Database error
             - 02091002F: Integration failure
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "504":
           description: |
             Timeout communicating with Debtor Service Provider.
@@ -142,10 +170,16 @@ paths:
             Possible error codes:
             - 02051002F: Debtor Service Provider timeout
             - 02051003F: Integration processing timeout
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         default:
           description: Unexpected error.
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
 
   /rtps/{rtpId}/cancel:
     post:
@@ -171,7 +205,10 @@ paths:
             - 02021000F: Invalid request format
             - 02021013F: Invalid rtpId format
             - 02021009F: Required header missing
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "401":
           description: |
             Wrong credentials.
@@ -181,7 +218,10 @@ paths:
             - 02011001F: Invalid token format
             - 02011002F: Expired token
             - 02011003F: Invalid signature
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "403":
           description: |
             Forbidden.
@@ -190,21 +230,30 @@ paths:
             - 02011004F: Insufficient permissions
             - 02011005F: Invalid scope
             - 02011006F: Account suspended
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "404":
           description: |
             Not found.
             
             Possible error codes:
             - 02041000F: RTP not found
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "406":
           description: |
             Not acceptable. Did you require application/json?
             
             Possible error codes:
             - 02021010F: Unsupported accept header
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "429":
           description: |
             Too many requests.
@@ -212,7 +261,10 @@ paths:
             Possible error codes:
             - 02051000F: Rate limit exceeded
             - 02051001F: Quota exceeded
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "500":
           description: |
             Server error.
@@ -221,7 +273,10 @@ paths:
             - 02091000F: Internal server error
             - 02091001F: Database error
             - 02091002F: Integration failure
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         "504":
           description: |
             Timeout communicating with Debtor Service Provider.
@@ -229,10 +284,16 @@ paths:
             Possible error codes:
             - 02051002F: Debtor Service Provider timeout
             - 02051003F: Integration processing timeout
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
         default:
           description: Unexpected error.
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/responses/Error'
 
 components:
   schemas:
