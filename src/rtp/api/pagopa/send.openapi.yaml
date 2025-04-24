@@ -69,7 +69,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "401":
           description: |
             Wrong credentials.
@@ -82,7 +111,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "403":
           description: |
             Forbidden.
@@ -94,7 +152,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "406":
           description: |
             Not acceptable. Did you require application/json?
@@ -104,7 +191,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "409":
           description: |
             Conflict.
@@ -115,7 +231,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "415":
           description: |
             Unsupported media type. Did you provide application/json?
@@ -126,7 +271,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "422":
           description: |
             Unprocessable Entity. Error received from Service Provider.
@@ -139,7 +313,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "429":
           description: |
             Too many requests.
@@ -150,7 +353,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "500":
           description: |
             Server error.
@@ -208,7 +440,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "401":
           description: |
             Wrong credentials.
@@ -221,7 +482,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "403":
           description: |
             Forbidden.
@@ -233,7 +523,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "404":
           description: |
             Not found.
@@ -243,7 +562,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "406":
           description: |
             Not acceptable. Did you require application/json?
@@ -253,7 +601,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "429":
           description: |
             Too many requests.
@@ -264,7 +641,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  '#/components/responses/Error'
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
+          headers:
+            Access-Control-Allow-Origin:
+              description: |
+                Indicates whether the response can be shared with requesting code
+                from the given origin.
+              required: false
+              schema:
+                $ref: '#/components/schemas/AccessControlAllowOrigin'
+            RateLimit-Limit:
+              description: The number of allowed requests in the current period.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitLimit'
+            RateLimit-Reset:
+              description: The number of seconds left in the current period
+              required: false
+              schema:
+                $ref: '#/components/schemas/RateLimitReset'
+            Retry-After:
+              description: |
+                The number of seconds to wait before allowing a follow-up request.
+              required: false
+              schema:
+                $ref: '#/components/schemas/RetryAfter'
         "500":
           description: |
             Server error.
