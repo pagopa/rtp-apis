@@ -311,38 +311,6 @@ paths:
                 The number of seconds to wait before allowing a follow-up request.
               required: false
               schema:
-                $ref: '#/components/schemas/RetryAfter'content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
                 $ref: '#/components/schemas/RetryAfter'
         "429":
           description: |
@@ -391,10 +359,26 @@ paths:
             Possible error codes:
             - 01091000F: Internal server error
             - 01091001F: Database error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error.
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
     get:
       operationId: getActivations
@@ -626,10 +610,26 @@ paths:
             Possible error codes:
             - 01091000F: Internal server error
             - 01091001F: Database error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error.
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
   /activations/{activationId}:
     get:
@@ -898,10 +898,26 @@ paths:
             
             Possible error codes:
             - 01091000F: Internal server error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error.
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
     put:
       operationId: updateActivation
@@ -1218,10 +1234,26 @@ paths:
             
             Possible error codes:
             - 01091000F: Internal server error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
     delete:
       operationId: deleteActivation
@@ -1488,10 +1520,26 @@ paths:
             
             Possible error codes:
             - 01091000F: Internal server error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
     patch:
       operationId: takeoverActivation
@@ -1798,10 +1846,26 @@ paths:
             
             Possible error codes:
             - 01091000F: Internal server error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
   /activations/payer:
     get:
@@ -2030,10 +2094,26 @@ paths:
             
             Possible error codes:
             - 01091000F: Internal server error
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
         default:
           description: Unexpected error.
-          $ref: '#/components/responses/Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+            text/*:
+              schema:
+                type: string
+                pattern: "^[ -~]{0,65535}$"
+                maxLength: 65535
 
 components:
   # ============================================================================
