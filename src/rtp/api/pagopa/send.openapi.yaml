@@ -8,7 +8,7 @@ info:
     pagoPa system, with strict validation to ensure data integrity.
 
     Error codes follow the format ZZXXKYYYT where:
-      - ZZ: Domain identifier (01=Activation, 02=Send)
+      - ZZ: Domain identifier
       - XX: Error category (01=Authentication, 02=Validation, etc.)
       - K: Method type 
       - YYY: Detailed error code
@@ -280,7 +280,7 @@ components:
     ErrorCode:
       description: |
         Error code following the format ZZXXKYYYT where:
-          - ZZ: Domain identifier (02=Send)
+          - ZZ: Domain identifier
           - XX: Error category (01=Authentication, 02=Validation, etc.)
           - K: Method type (1=POST, etc.)
           - YYY: Detailed error code
