@@ -897,7 +897,7 @@ components:
         - code
         - description
       example:
-        code: "01000000F"
+        code: "01021000F"
         description: "Wrong party identifier"
 
     Errors:
@@ -924,7 +924,7 @@ components:
         - errors
       example:
         errors:
-          - code: "01000000F"
+          - code: "01021000F"
             description: "Wrong party identifier"
 
     Type2Error:
