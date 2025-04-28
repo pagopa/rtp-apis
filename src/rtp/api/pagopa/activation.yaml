@@ -66,319 +66,79 @@ paths:
           #description: Created.
           $ref: '#/components/responses/CreateActivation'
         "400":
-          description: |
-            Bad request.
+          #description: |
+          #  Bad request.
             
-            Possible error codes:
-            - 01021000F: Invalid request format
-            - 01021001F: Missing required field
-            - 01021002F: Invalid fiscal code format
-            - 01021003F: Invalid RTP Service Provider ID format
-            - 01021004F: Invalid request payload structure
-            - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021000F: Invalid request format
+          #  - 01021001F: Missing required field
+          #  - 01021002F: Invalid fiscal code format
+          #  - 01021003F: Invalid RTP Service Provider ID format
+          #  - 01021004F: Invalid request payload structure
+          #  - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
           #description: Wrong credentials.
-          description: |
-            Wrong credentials.
+          #description: |
+          #  Wrong credentials.
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-            - 01011003F: Invalid signature
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          #  - 01011003F: Invalid signature
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden.
+          #description: |
+          #  Forbidden.
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011005F: Invalid scope
-            - 01011006F: Mismatch between Payer's RTP Service Provider ID and token subject
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011005F: Invalid scope
+          #  - 01011006F: Mismatch between Payer's RTP Service Provider ID and token subject
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "409":
-          description: |
-            Conflict.
+          #description: |
+          #  Conflict.
             
-            Possible error codes:
-            - 01031000F: Activation with the same Payer ID already exists
-            - 01031001F: Duplicate activation request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01031000F: Activation with the same Payer ID already exists
+          #  - 01031001F: Duplicate activation request
+          $ref: '#/components/responses/ConflictError'
         "415":
-          description: |
-            Unsupported media type. Did you provide application/json?
+          #description: |
+          #  Unsupported media type. Did you provide application/json?
             
-            Possible error codes:
-            - 01021011F: Unsupported content type
-            - 01021012F: Invalid content encoding
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021011F: Unsupported content type
+          #  - 01021012F: Invalid content encoding
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests.
+          #description: |
+          #  Too many requests.
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-            - 01051001F: Quota exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          #  - 01051001F: Quota exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error.
+          #description: |
+          #  Server error.
             
-            Possible error codes:
-            - 01091000F: Internal server error
-            - 01091001F: Database error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          #  - 01091001F: Database error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
 
     get:
       operationId: getActivations
@@ -402,234 +162,58 @@ paths:
           #description: Ok.
           $ref: '#/components/responses/PageOfActivations'
         "400":
-          description: |
-            Bad request.
+          #description: |
+          #  Bad request.
             
-            Possible error codes:
-            - 01021005F: Invalid page parameter
-            - 01021006F: Invalid size parameter
-            - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021005F: Invalid page parameter
+          #  - 01021006F: Invalid size parameter
+          #  - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
-          description: |
-            Access token is missing or invalid.
+          #description: |
+          #  Access token is missing or invalid.
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-            - 01011003F: Invalid signature
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          #  - 01011003F: Invalid signature
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden.
+          #description: |
+          #  Forbidden.
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011005F: Invalid scope
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011005F: Invalid scope
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests.
+          #description: |
+          #  Too many requests.
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-            - 01051001F: Quota exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          #  - 01051001F: Quota exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error.
-            
-            Possible error codes:
-            - 01091000F: Internal server error
-            - 01091001F: Database error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: |
+          # Server error.
+          
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          #  - 01091001F: Database error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
 
   /activations/{activationId}:
     get:
@@ -654,270 +238,62 @@ paths:
           #description: Found.
           $ref: '#/components/responses/Activation'
         "400":
-          description: |
-              Bad request.
+          #description: |
+          #    Bad request.
               
-              Possible error codes:
-              - 01021007F: Invalid activation ID format
-              - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #    Possible error codes:
+          #    - 01021007F: Invalid activation ID format
+          #    - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
-          description: |
-            Access token is missing or invalid.
+          #description: |
+          #  Access token is missing or invalid.
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden.
+          #description: |
+          #  Forbidden.
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011005F: Invalid scope
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011005F: Invalid scope
+          $ref: '#/components/responses/Error'
         "404":
-          description: |
-            Not found.
+          #description: |
+          #  Not found.
             
-            Possible error codes:
-            - 01041000F: Activation not found
-            - 01041001F: Activation not visible to non-admin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01041000F: Activation not found
+          #  - 01041001F: Activation not visible to non-admin
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests.
+          #description: |
+          #  Too many requests.
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error.
+          #description: |
+          #  Server error.
             
-            Possible error codes:
-            - 01091000F: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
 
     put:
       operationId: updateActivation
@@ -945,315 +321,75 @@ paths:
           #description: No content
           $ref: '#/components/responses/NoContent'
         "400":
-          description: |
-            Bad request
+          #description: |
+          #  Bad request
             
-            Possible error codes:
-            - 01021000F: Invalid request format
-            - 01021007F: Invalid activation ID format
-            - 01021001F: Missing required field
-            - 01021002F: Invalid fiscal code format
-            - 01021003F: Invalid RTP Service Provider ID format
-            - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021000F: Invalid request format
+          #  - 01021007F: Invalid activation ID format
+          #  - 01021001F: Missing required field
+          #  - 01021002F: Invalid fiscal code format
+          #  - 01021003F: Invalid RTP Service Provider ID format
+          #  - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
-          description: |
-            Wrong credentials
+          #description: |
+          #  Wrong credentials
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden
+          #description: |
+          #  Forbidden
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011006F: Mismatch between the provided Payer's RTP Service Provider ID and token
-            - 01011005F: Invalid scope
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011006F: Mismatch between the provided Payer's RTP Service Provider ID and token
+          #  - 01011005F: Invalid scope
+          $ref: '#/components/responses/Error'
         "404":
-          description: |
-            Not found
+          #description: |
+          #  Not found
             
-            Possible error codes:
-            - 01041000F: Activation not found
-            - 01041001F: Activation not visible to non-admin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01041000F: Activation not found
+          #  - 01041001F: Activation not visible to non-admin
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "415":
-          description: |
-            Unsupported media type. Did you provide application/json?
+          #description: |
+          #  Unsupported media type. Did you provide application/json?
             
-            Possible error codes:
-            - 01021011F: Unsupported content type
-            - 01021012F: Invalid content encoding
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021011F: Unsupported content type
+          #  - 01021012F: Invalid content encoding
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests
+          #description: |
+          #  Too many requests
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error
+          #description: |
+          #  Server error
             
-            Possible error codes:
-            - 01091000F: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error
+          $ref: '#/components/responses/Error'
 
     delete:
       operationId: deleteActivation
@@ -1276,270 +412,62 @@ paths:
           #description: No content
           $ref: '#/components/responses/NoContent'
         "400":
-          description: |
-            Bad request
+          #description: |
+          #  Bad request
             
-            Possible error codes:
-            - 01021007F: Invalid activation ID format
-            - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021007F: Invalid activation ID format
+          #  - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
-          description: |
-            Access token is missing or invalid
+          #description: |
+          #  Access token is missing or invalid
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden
+          #description: |
+          #  Forbidden
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011006F: Invalid scope
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011006F: Invalid scope
+          $ref: '#/components/responses/Error'
         "404":
-          description: |
-            Not found
+          #description: |
+          #  Not found
             
-            Possible error codes:
-            - 01041000F: Activation not found
-            - 01041001F: Activation not visible to non-admin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01041000F: Activation not found
+          #  - 01041001F: Activation not visible to non-admin
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests
+          #description: |
+          #  Too many requests
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error
+          #description: |
+          #  Server error
             
-            Possible error codes:
-            - 01091000F: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error
+          $ref: '#/components/responses/Error'
 
     patch:
       operationId: takeoverActivation
@@ -1561,311 +489,71 @@ paths:
           #description: No content
           $ref: '#/components/responses/NoContent'
         "400":
-          description: |
-            Bad request
+          #description: |
+          #  Bad request
             
-            Possible error codes:
-            - 01021000F: Invalid request format
-            - 01021007F: Invalid activation ID format
-            - 01021003F: Invalid RTP Service Provider ID format
-            - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021000F: Invalid request format
+          #  - 01021007F: Invalid activation ID format
+          #  - 01021003F: Invalid RTP Service Provider ID format
+          #  - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
-          description: |
-            Wrong credentials
+          #description: |
+          #  Wrong credentials
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden
+          #description: |
+          #  Forbidden
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011006F: Invalid scope
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011006F: Invalid scope
+          $ref: '#/components/responses/Error'
         "404":
-          description: |
-            Not found
+          #description: |
+          #  Not found
             
-            Possible error codes:
-            - 01041000F: Activation not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01041000F: Activation not found
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "415":
-          description: |
-            Unsupported media type. Did you provide application/json?
+          #description: |
+          #  Unsupported media type. Did you provide application/json?
             
-            Possible error codes:
-            - 01021011F: Unsupported content type
-            - 01021012F: Invalid content encoding
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021011F: Unsupported content type
+          #  - 01021012F: Invalid content encoding
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests
+          #description: |
+          #  Too many requests
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error
+          #description: |
+          #  Server error
             
-            Possible error codes:
-            - 01091000F: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error
+          $ref: '#/components/responses/Error'
 
   /activations/payer:
     get:
@@ -1889,231 +577,55 @@ paths:
           #description: Ok.
           $ref: '#/components/responses/Activation'
         "400":
-          description: |
-            Bad request.
+          #description: |
+          #  Bad request.
             
-            Possible error codes:
-            - 01021008F: Missing Payer ID
-            - 01021013F: Invalid Payer ID format
-            - 01021009F: Required header missing
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021008F: Missing Payer ID
+          #  - 01021013F: Invalid Payer ID format
+          #  - 01021009F: Required header missing
+          $ref: '#/components/responses/Error'
         "401":
-          description: |
-            Access token is missing or invalid.
+          #description: |
+          #  Access token is missing or invalid.
             
-            Possible error codes:
-            - 01011000F: Missing authentication token
-            - 01011001F: Invalid token format
-            - 01011002F: Expired token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011000F: Missing authentication token
+          #  - 01011001F: Invalid token format
+          #  - 01011002F: Expired token
+          $ref: '#/components/responses/Error'
         "403":
-          description: |
-            Forbidden.
+          #description: |
+          #  Forbidden.
             
-            Possible error codes:
-            - 01011004F: Insufficient permissions
-            - 01011005F: Invalid scope
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01011004F: Insufficient permissions
+          #  - 01011005F: Invalid scope
+          $ref: '#/components/responses/Error'
         "406":
-          description: |
-            Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
             
-            Possible error codes:
-            - 01021010F: Unsupported accept header
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01021010F: Unsupported accept header
+          $ref: '#/components/responses/Error'
         "429":
-          description: |
-            Too many requests.
+          #description: |
+          #  Too many requests.
             
-            Possible error codes:
-            - 01051000F: Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
-          headers:
-            Access-Control-Allow-Origin:
-              description: |
-                Indicates whether the response can be shared with requesting code
-                from the given origin.
-              required: false
-              schema:
-                $ref: '#/components/schemas/AccessControlAllowOrigin'
-            RateLimit-Limit:
-              description: The number of allowed requests in the current period.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitLimit'
-            RateLimit-Reset:
-              description: The number of seconds left in the current period
-              required: false
-              schema:
-                $ref: '#/components/schemas/RateLimitReset'
-            Retry-After:
-              description: |
-                The number of seconds to wait before allowing a follow-up request.
-              required: false
-              schema:
-                $ref: '#/components/schemas/RetryAfter'
+          #  Possible error codes:
+          #  - 01051000F: Rate limit exceeded
+          $ref: '#/components/responses/Error'
         "500":
-          description: |
-            Server error.
+          #description: |
+          #  Server error.
             
-            Possible error codes:
-            - 01091000F: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #  Possible error codes:
+          #  - 01091000F: Internal server error
+          $ref: '#/components/responses/Error'
         default:
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Errors'
-            text/*:
-              schema:
-                type: string
-                pattern: "^[ -~]{0,65535}$"
-                maxLength: 65535
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
 
 components:
   # ============================================================================
