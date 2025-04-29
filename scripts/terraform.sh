@@ -275,6 +275,14 @@ function check_azure_login() {
   account_info=$(az account show 2>/dev/null)
   local exit_code=$?
   
+  # Check if the token is valid by trying to list resource groups
+  # This will fail if the token is expired
+  if [ $exit_code -eq 0 ]; then
+    az group list --query "[].name" --output tsv >/dev/null 2>&1
+    exit_code=$?
+  fi
+  
+  
   if [ $exit_code -ne 0 ]; then
     echo "You are not logged into Azure. Opening Azure login page..."
     
