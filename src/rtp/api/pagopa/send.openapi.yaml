@@ -6,6 +6,13 @@ info:
   description: |
     The API is designed for creating and sending payment requests through the
     pagoPa system, with strict validation to ensure data integrity.
+
+    Error codes follow the format ZZXXKYYYT where:
+      - ZZ: Domain identifier
+      - XX: Error category (01=Authentication, 02=Validation, etc.)
+      - K: Method type 
+      - YYY: Detailed error code
+      - T: Severity (F=Fatal, E=Error, W=Warning)
   contact:
     name: PagoPA S.p.A.
     email: rtp@pagopa.it
@@ -44,34 +51,98 @@ paths:
           #description: Created.
           $ref: '#/components/responses/RTPCreatedAndSent'
         "400":
-          #description: Bad request.
+          #description: |
+          #  Bad request.
+            
+          #  Possible error codes:
+          #  - 02021000E: Invalid request format
+          #  - 02021001E: Missing required field
+          #  - 02021002E: Invalid payeeId format
+          #  - 02021003E: Invalid payerId format
+          #  - 02021004E: Invalid noticeNumber format
+          #  - 02021005E: Invalid amount value
+          #  - 02021006E: Invalid description format
+          #  - 02021007E: Invalid subject format
+          #  - 02021008E: Invalid expiryDate format
+          #  - 02021009E: Required header missing
+          
           $ref: '#/components/responses/Error'
         "401":
-          #description: Wrong credentials.
+          #description: |
+          #  Wrong credentials.
+            
+          #  Possible error codes:
+          #  - 02011000F: Missing authentication token
+          #  - 02011001E: Invalid token format
+          #  - 02011002E: Expired token
+          #  - 02011003F: Invalid signature
           $ref: '#/components/responses/Error'
         "403":
-          #description: Forbidden
+          #description: |
+          #  Forbidden.
+            
+          #  Possible error codes:
+          #  - 02011004E: Insufficient permissions
+          #  - 02011005E: Invalid scope
+          #  - 02011006E: Account suspended
           $ref: '#/components/responses/Error'
         "406":
-          #description: Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
+            
+          #  Possible error codes:
+          #  - 02021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "409":
-          #description: Conflict.
+          #description: |
+          #  Conflict.
+            
+          #  Possible error codes:
+          #  - 02031000E: Notice already processed
+          #  - 02031001E: Duplicate request
           $ref: '#/components/responses/Error'
         "415":
-          #description: Unsupported media type. Did you provide application/json?
+          #description: |
+          #  Unsupported media type. Did you provide application/json?
+            
+          #  Possible error codes:
+          #  - 02021011E: Unsupported content type
+          #  - 02021012E: Invalid content encoding
           $ref: '#/components/responses/Error'
         "422":
-          #description: Error received from Service Provider?
+          #description: |
+          #  Unprocessable Entity. Error received from Service Provider.
+            
+          #  Possible error codes:
+          #  - 02031002E: Service Provider rejection
+          #  - 02031003E: Invalid payment notice
+          #  - 02031004E: Expired payment notice
+          #  - 02031005E: Business rule violation
           $ref: '#/components/responses/Error'
         "429":
-          #description: Too many request.
+          #description: |
+          #  Too many requests.
+            
+          #  Possible error codes:
+          #  - 02051000E: Rate limit exceeded
+          #  - 02051001E: Quota exceeded
           $ref: '#/components/responses/Error'
         "500":
-          #description: Server error.
+          #description: |
+          #  Server error.
+            
+          #  Possible error codes:
+          #  - 02091000F: Internal server error
+          #  - 02091001F: Database error
+          #  - 02091002F: Integration failure
           $ref: '#/components/responses/Error'
         "504":
-          #description: Timeout communicating with Debtor Service Provider
+          #description: |
+          #  Timeout communicating with Debtor Service Provider.
+            
+          #  Possible error codes:
+          #  - 02051002F: Debtor Service Provider timeout
+          #  - 02051003F: Integration processing timeout
           $ref: '#/components/responses/Error'
         default:
           #description: Unexpected error.
@@ -94,32 +165,75 @@ paths:
           #description: No content
           $ref: '#/components/responses/NoContent'
         "400":
-          #description: Bad request
+          #description: |
+          #  Bad request.
+            
+          #  Possible error codes:
+          #  - 02021000E: Invalid request format
+          #  - 02021013E: Invalid rtpId format
+          #  - 02021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
-          #description: Wrong credentials
+          #description: |
+          #  Wrong credentials.
+            
+          #  Possible error codes:
+          #  - 02011000E: Missing authentication token
+          #  - 02011001E: Invalid token format
+          #  - 02011002E: Expired token
+          #  - 02011003F: Invalid signature
           $ref: '#/components/responses/Error'
         "403":
-          #description: Forbidden
+          #description: |
+          #  Forbidden.
+            
+          #  Possible error codes:
+          #  - 02011004E: Insufficient permissions
+          #  - 02011005E: Invalid scope
+          #  - 02011006E: Account suspended
           $ref: '#/components/responses/Error'
         "404":
-          #description: Not found
+          #description: |
+          #  Not found.
+            
+          #  Possible error codes:
+          #  - 02041000E: RTP not found
           $ref: '#/components/responses/Error'
         "406":
-          #description: Not acceptable. Did you require application/json?
+          #description: |
+          #  Not acceptable. Did you require application/json?
+            
+          #  Possible error codes:
+          #  - 02021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "429":
-          #description: Too many request
+          #description: |
+          #  Too many requests.
+            
+          #  Possible error codes:
+          #  - 02051000E: Rate limit exceeded
+          #  - 02051001E: Quota exceeded
           $ref: '#/components/responses/Error'
         "500":
-          #description: Server error
+          #description: |
+          #  Server error.
+            
+          #  Possible error codes:
+          #  - 02091000F: Internal server error
+          #  - 02091001F: Database error
+          #  - 02091002F: Integration failure
           $ref: '#/components/responses/Error'
         "504":
-          #description: Timeout communicating with Debtor Service Provider
+          #description: |
+          #  Timeout communicating with Debtor Service Provider.
+            
+          #  Possible error codes:
+          #  - 02051002F: Debtor Service Provider timeout
+          #  - 02051003F: Integration processing timeout
           $ref: '#/components/responses/Error'
         default:
-          #description: Unexpected error
-          $ref: '#/components/responses/Error'     
+          #description: Unexpected error.
+          $ref: '#/components/responses/Error'
 
 components:
   schemas:
@@ -164,12 +278,56 @@ components:
     # Basic types for error handling.
     # --------------------------------------------------------------------------
     ErrorCode:
-      description: Error code.
+      description: |
+        Error code following the format ZZXXKYYYT where:
+          - ZZ: Domain identifier
+          - XX: Error category (01=Authentication, 02=Validation, etc.)
+          - K: Method type (1=POST, etc.)
+          - YYY: Detailed error code
+          - T: Severity (F=Fatal, E=Error, W=Warning)
       type: string
-      pattern: "^[A-F0-9]{9}$"
+      enum:
+        # POST /rtps
+        - "02021000E" # Invalid request format
+        - "02021001E" # Missing required field
+        - "02021002E" # Invalid payeeId format
+        - "02021003E" # Invalid payerId format
+        - "02021004E" # Invalid noticeNumber format
+        - "02021005E" # Invalid amount value
+        - "02021006E" # Invalid description format
+        - "02021007E" # Invalid subject format
+        - "02021008E" # Invalid expiryDate format
+        - "02021009E" # Required header missing
+        - "02011000E" # Missing authentication token
+        - "02011001E" # Invalid token format
+        - "02011002E" # Expired token
+        - "02011003F" # Invalid signature
+        - "02011004E" # Insufficient permissions
+        - "02011005E" # Invalid scope
+        - "02011006E" # Account suspended
+        - "02021010E" # Unsupported accept header
+        - "02031000E" # Notice already processed
+        - "02031001E" # Duplicate request
+        - "02021011E" # Unsupported content type
+        - "02021012E" # Invalid content encoding
+        - "02031002E" # Service Provider rejection
+        - "02031003E" # Invalid payment notice
+        - "02031004E" # Expired payment notice
+        - "02031005E" # Business rule violation
+        - "02051000E" # Rate limit exceeded
+        - "02051001E" # Quota exceeded
+        - "02091000F" # Internal server error
+        - "02091001F" # Database error
+        - "02091002F" # Integration failure
+        - "02051002F" # Debtor Service Provider timeout
+        - "02051003F" # Integration processing timeout
+        
+        # POST /rtps/{rtpId}/cancel
+        - "02021013E" # Invalid rtpId format
+        - "02041000E" # RTP not found
       minLength: 9
       maxLength: 9
-      example: "01000000F"
+      example: "02021000E"
 
     ErrorDescription:
       description: Error description.
@@ -203,7 +361,7 @@ components:
         - code
         - description
       example:
-        code: "01000000F"
+        code: "02021000E"
         description: "Wrong party identifier"
 
     Errors:
@@ -230,7 +388,7 @@ components:
         - errors
       example:
         errors:
-          - code: "01000000F"
+          - code: "02021000E"
             description: "Wrong party identifier"
 
     Type2Error:

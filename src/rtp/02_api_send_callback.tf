@@ -32,7 +32,7 @@ resource "azurerm_api_management_api" "rtp_callback_api" {
 
   import {
     content_format = "openapi"
-    content_value  = templatefile("./api/pagopa/callback.openapi.yaml", {})
+    content_value  = templatefile("./api/epc/callback.openapi.yaml", {})
   }
 }
 
