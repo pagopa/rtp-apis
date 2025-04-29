@@ -1,0 +1,37 @@
+<policies>
+    <inbound>
+        <base/>
+        <return-response>
+            <set-status code="200" reason="OK"/>
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>
+                {
+                "payees": [
+                {
+                "payeeId": "02438750586",
+                "name": "Roma Capitale"
+                },
+                {
+                "payeeId": "80015010723",
+                "name": "Comune di Bari"
+                }
+                ],
+                "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "page": 0,
+                "size": 2
+                }
+                }
+            </set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base/>
+    </backend>
+    <outbound>
+        <base/>
+    </outbound>
+</policies>

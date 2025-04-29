@@ -42,3 +42,11 @@ resource "azurerm_api_management_product_api" "rtp_payees_registry_product_api" 
   product_id = azurerm_api_management_product.rtp.product_id
   depends_on = [azurerm_api_management_product.rtp, azurerm_api_management_api.rtp_payees_registry_api]
 }
+
+resource "azurerm_api_management_api_policy" "rtp_payees_registry_policy" {
+  api_name            = azurerm_api_management_api.rtp_payees_registry_api.name
+  api_management_name = data.azurerm_api_management.this.name
+  resource_group_name = data.azurerm_api_management.this.resource_group_name
+
+  xml_content = templatefile("./api/pagopa/payees_registry_policy.xml", {})
+  }
