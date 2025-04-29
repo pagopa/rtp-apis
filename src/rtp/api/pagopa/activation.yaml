@@ -70,12 +70,12 @@ paths:
           #  Bad request.
             
           #  Possible error codes:
-          #  - 01021000F: Invalid request format
-          #  - 01021001F: Missing required field
-          #  - 01021002F: Invalid fiscal code format
-          #  - 01021003F: Invalid RTP Service Provider ID format
-          #  - 01021004F: Invalid request payload structure
-          #  - 01021009F: Required header missing
+          #  - 01021000E: Invalid request format
+          #  - 01021001E: Missing required field
+          #  - 01021002E: Invalid fiscal code format
+          #  - 01021003E: Invalid RTP Service Provider ID format
+          #  - 01021004E: Invalid request payload structure
+          #  - 01021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
           #description: Wrong credentials.
@@ -83,18 +83,18 @@ paths:
           #  Wrong credentials.
             
           #  Possible error codes:
-          #  - 01011000F: Missing authentication token
-          #  - 01011001F: Invalid token format
-          #  - 01011002F: Expired token
-          #  - 01011003F: Invalid signature
+          #  - 01011000E: Missing authentication token
+          #  - 01011001E: Invalid token format
+          #  - 01011002E: Expired token
+          #  - 01011003E: Invalid signature
           $ref: '#/components/responses/Error'
         "403":
           #description: |
           #  Forbidden.
             
           #  Possible error codes:
-          #  - 01011004F: Insufficient permissions
-          #  - 01011005F: Invalid scope
+          #  - 01011004E: Insufficient permissions
+          #  - 01011005E: Invalid scope
           #  - 01011006F: Mismatch between Payer's RTP Service Provider ID and token subject
           $ref: '#/components/responses/Error'
         "406":
@@ -102,31 +102,31 @@ paths:
           #  Not acceptable. Did you require application/json?
             
           #  Possible error codes:
-          #  - 01021010F: Unsupported accept header
+          #  - 01021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "409":
           #description: |
           #  Conflict.
             
           #  Possible error codes:
-          #  - 01031000F: Activation with the same Payer ID already exists
-          #  - 01031001F: Duplicate activation request
+          #  - 01031000E: Activation with the same Payer ID already exists
+          #  - 01031001E: Duplicate activation request
           $ref: '#/components/responses/ConflictError'
         "415":
           #description: |
           #  Unsupported media type. Did you provide application/json?
             
           #  Possible error codes:
-          #  - 01021011F: Unsupported content type
-          #  - 01021012F: Invalid content encoding
+          #  - 01021011E: Unsupported content type
+          #  - 01021012E: Invalid content encoding
           $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests.
             
           #  Possible error codes:
-          #  - 01051000F: Rate limit exceeded
-          #  - 01051001F: Quota exceeded
+          #  - 01051000E: Rate limit exceeded
+          #  - 01051001E: Quota exceeded
           $ref: '#/components/responses/Error'
         "500":
           #description: |
@@ -166,18 +166,18 @@ paths:
           #  Bad request.
             
           #  Possible error codes:
-          #  - 01021005F: Invalid page parameter
-          #  - 01021006F: Invalid size parameter
-          #  - 01021009F: Required header missing
+          #  - 01021005E: Invalid page parameter
+          #  - 01021006E: Invalid size parameter
+          #  - 01021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
           #description: |
           #  Access token is missing or invalid.
             
           #  Possible error codes:
-          #  - 01011000F: Missing authentication token
-          #  - 01011001F: Invalid token format
-          #  - 01011002F: Expired token
+          #  - 01011000E: Missing authentication token
+          #  - 01011001E: Invalid token format
+          #  - 01011002E: Expired token
           #  - 01011003F: Invalid signature
           $ref: '#/components/responses/Error'
         "403":
@@ -185,23 +185,23 @@ paths:
           #  Forbidden.
             
           #  Possible error codes:
-          #  - 01011004F: Insufficient permissions
-          #  - 01011005F: Invalid scope
+          #  - 01011004E: Insufficient permissions
+          #  - 01011005E: Invalid scope
           $ref: '#/components/responses/Error'
         "406":
           #description: |
           #  Not acceptable. Did you require application/json?
             
           #  Possible error codes:
-          #  - 01021010F: Unsupported accept header
+          #  - 01021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests.
             
           #  Possible error codes:
-          #  - 01051000F: Rate limit exceeded
-          #  - 01051001F: Quota exceeded
+          #  - 01051000E: Rate limit exceeded
+          #  - 01051001E: Quota exceeded
           $ref: '#/components/responses/Error'
         "500":
           #description: |
@@ -242,47 +242,47 @@ paths:
           #    Bad request.
               
           #    Possible error codes:
-          #    - 01021007F: Invalid activation ID format
-          #    - 01021009F: Required header missing
+          #    - 01021007E: Invalid activation ID format
+          #    - 01021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
           #description: |
           #  Access token is missing or invalid.
             
           #  Possible error codes:
-          #  - 01011000F: Missing authentication token
-          #  - 01011001F: Invalid token format
-          #  - 01011002F: Expired token
+          #  - 01011000E: Missing authentication token
+          #  - 01011001E: Invalid token format
+          #  - 01011002E: Expired token
           $ref: '#/components/responses/Error'
         "403":
           #description: |
           #  Forbidden.
             
           #  Possible error codes:
-          #  - 01011004F: Insufficient permissions
-          #  - 01011005F: Invalid scope
+          #  - 01011004E: Insufficient permissions
+          #  - 01011005E: Invalid scope
           $ref: '#/components/responses/Error'
         "404":
           #description: |
           #  Not found.
             
           #  Possible error codes:
-          #  - 01041000F: Activation not found
-          #  - 01041001F: Activation not visible to non-admin
+          #  - 01041000E: Activation not found
+          #  - 01041001E: Activation not visible to non-admin
           $ref: '#/components/responses/Error'
         "406":
           #description: |
           #  Not acceptable. Did you require application/json?
             
           #  Possible error codes:
-          #  - 01021010F: Unsupported accept header
+          #  - 01021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests.
             
           #  Possible error codes:
-          #  - 01051000F: Rate limit exceeded
+          #  - 01051000E: Rate limit exceeded
           $ref: '#/components/responses/Error'
         "500":
           #description: |
@@ -325,60 +325,60 @@ paths:
           #  Bad request
             
           #  Possible error codes:
-          #  - 01021000F: Invalid request format
-          #  - 01021007F: Invalid activation ID format
-          #  - 01021001F: Missing required field
-          #  - 01021002F: Invalid fiscal code format
-          #  - 01021003F: Invalid RTP Service Provider ID format
-          #  - 01021009F: Required header missing
+          #  - 01021000E: Invalid request format
+          #  - 01021007E: Invalid activation ID format
+          #  - 01021001E: Missing required field
+          #  - 01021002E: Invalid fiscal code format
+          #  - 01021003E: Invalid RTP Service Provider ID format
+          #  - 01021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
           #description: |
           #  Wrong credentials
             
           #  Possible error codes:
-          #  - 01011000F: Missing authentication token
-          #  - 01011001F: Invalid token format
-          #  - 01011002F: Expired token
+          #  - 01011000E: Missing authentication token
+          #  - 01011001E: Invalid token format
+          #  - 01011002E: Expired token
           $ref: '#/components/responses/Error'
         "403":
           #description: |
           #  Forbidden
             
           #  Possible error codes:
-          #  - 01011004F: Insufficient permissions
+          #  - 01011004E: Insufficient permissions
           #  - 01011006F: Mismatch between the provided Payer's RTP Service Provider ID and token
-          #  - 01011005F: Invalid scope
+          #  - 01011005E: Invalid scope
           $ref: '#/components/responses/Error'
         "404":
           #description: |
           #  Not found
             
           #  Possible error codes:
-          #  - 01041000F: Activation not found
-          #  - 01041001F: Activation not visible to non-admin
+          #  - 01041000E: Activation not found
+          #  - 01041001E: Activation not visible to non-admin
           $ref: '#/components/responses/Error'
         "406":
           #description: |
           #  Not acceptable. Did you require application/json?
             
           #  Possible error codes:
-          #  - 01021010F: Unsupported accept header
+          #  - 01021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "415":
           #description: |
           #  Unsupported media type. Did you provide application/json?
             
           #  Possible error codes:
-          #  - 01021011F: Unsupported content type
-          #  - 01021012F: Invalid content encoding
+          #  - 01021011E: Unsupported content type
+          #  - 01021012E: Invalid content encoding
           $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests
             
           #  Possible error codes:
-          #  - 01051000F: Rate limit exceeded
+          #  - 01051000E: Rate limit exceeded
           $ref: '#/components/responses/Error'
         "500":
           #description: |
@@ -416,47 +416,47 @@ paths:
           #  Bad request
             
           #  Possible error codes:
-          #  - 01021007F: Invalid activation ID format
-          #  - 01021009F: Required header missing
+          #  - 01021007E: Invalid activation ID format
+          #  - 01021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
           #description: |
           #  Access token is missing or invalid
             
           #  Possible error codes:
-          #  - 01011000F: Missing authentication token
-          #  - 01011001F: Invalid token format
-          #  - 01011002F: Expired token
+          #  - 01011000E: Missing authentication token
+          #  - 01011001E: Invalid token format
+          #  - 01011002E: Expired token
           $ref: '#/components/responses/Error'
         "403":
           #description: |
           #  Forbidden
             
           #  Possible error codes:
-          #  - 01011004F: Insufficient permissions
-          #  - 01011006F: Invalid scope
+          #  - 01011004E: Insufficient permissions
+          #  - 01011006E: Invalid scope
           $ref: '#/components/responses/Error'
         "404":
           #description: |
           #  Not found
             
           #  Possible error codes:
-          #  - 01041000F: Activation not found
-          #  - 01041001F: Activation not visible to non-admin
+          #  - 01041000E: Activation not found
+          #  - 01041001E: Activation not visible to non-admin
           $ref: '#/components/responses/Error'
         "406":
           #description: |
           #  Not acceptable. Did you require application/json?
             
           #  Possible error codes:
-          #  - 01021010F: Unsupported accept header
+          #  - 01021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests
             
           #  Possible error codes:
-          #  - 01051000F: Rate limit exceeded
+          #  - 01051000E: Rate limit exceeded
           $ref: '#/components/responses/Error'
         "500":
           #description: |
@@ -493,56 +493,56 @@ paths:
           #  Bad request
             
           #  Possible error codes:
-          #  - 01021000F: Invalid request format
-          #  - 01021007F: Invalid activation ID format
-          #  - 01021003F: Invalid RTP Service Provider ID format
-          #  - 01021009F: Required header missing
+          #  - 01021000E: Invalid request format
+          #  - 01021007E: Invalid activation ID format
+          #  - 01021003E: Invalid RTP Service Provider ID format
+          #  - 01021009E: Required header missing
           $ref: '#/components/responses/Error'
         "401":
           #description: |
           #  Wrong credentials
             
           #  Possible error codes:
-          #  - 01011000F: Missing authentication token
-          #  - 01011001F: Invalid token format
-          #  - 01011002F: Expired token
+          #  - 01011000E: Missing authentication token
+          #  - 01011001E: Invalid token format
+          #  - 01011002E: Expired token
           $ref: '#/components/responses/Error'
         "403":
           #description: |
           #  Forbidden
             
           #  Possible error codes:
-          #  - 01011004F: Insufficient permissions
-          #  - 01011006F: Invalid scope
+          #  - 01011004E: Insufficient permissions
+          #  - 01011006E: Invalid scope
           $ref: '#/components/responses/Error'
         "404":
           #description: |
           #  Not found
             
           #  Possible error codes:
-          #  - 01041000F: Activation not found
+          #  - 01041000E: Activation not found
           $ref: '#/components/responses/Error'
         "406":
           #description: |
           #  Not acceptable. Did you require application/json?
             
           #  Possible error codes:
-          #  - 01021010F: Unsupported accept header
+          #  - 01021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
         "415":
           #description: |
           #  Unsupported media type. Did you provide application/json?
             
           #  Possible error codes:
-          #  - 01021011F: Unsupported content type
-          #  - 01021012F: Invalid content encoding
+          #  - 01021011E: Unsupported content type
+          #  - 01021012E: Invalid content encoding
           $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests
             
           #  Possible error codes:
-          #  - 01051000F: Rate limit exceeded
+          #  - 01051000E: Rate limit exceeded
           $ref: '#/components/responses/Error'
         "500":
           #description: |
@@ -718,45 +718,45 @@ components:
       type: string
       enum:
         # POST /activations
-        - "01021000F" # Invalid request format
-        - "01021001F" # Missing required field
-        - "01021002F" # Invalid fiscal code format
-        - "01021003F" # Invalid RTP Service Provider ID format
-        - "01021004F" # Invalid request payload structure
-        - "01021009F" # Required header missing
-        - "01011000F" # Missing authentication token
-        - "01011001F" # Invalid token format
-        - "01011002F" # Expired token
+        - "01021000E" # Invalid request format
+        - "01021001E" # Missing required field
+        - "01021002E" # Invalid fiscal code format
+        - "01021003E" # Invalid RTP Service Provider ID format
+        - "01021004E" # Invalid request payload structure
+        - "01021009E" # Required header missing
+        - "01011000E" # Missing authentication token
+        - "01011001E" # Invalid token format
+        - "01011002E" # Expired token
         - "01011003F" # Invalid signature
-        - "01011004F" # Insufficient permissions
-        - "01011005F" # Invalid scope
+        - "01011004E" # Insufficient permissions
+        - "01011005E" # Invalid scope
         - "01011006F" # Mismatch between Payer's RTP Service Provider ID and token subject
-        - "01021010F" # Unsupported accept header
-        - "01031000F" # Activation with the same Payer ID already exists
-        - "01031001F" # Duplicate activation request
-        - "01021011F" # Unsupported content type
-        - "01021012F" # Invalid content encoding
-        - "01051000F" # Rate limit exceeded
-        - "01051001F" # Quota exceeded
+        - "01021010E" # Unsupported accept header
+        - "01031000E" # Activation with the same Payer ID already exists
+        - "01031001E" # Duplicate activation request
+        - "01021011E" # Unsupported content type
+        - "01021012E" # Invalid content encoding
+        - "01051000E" # Rate limit exceeded
+        - "01051001E" # Quota exceeded
         - "01091000F" # Internal server error
         - "01091001F" # Database error
         
         # GET /activations
-        - "01021005F" # Invalid page parameter
-        - "01021006F" # Invalid size parameter
+        - "01021005E" # Invalid page parameter
+        - "01021006E" # Invalid size parameter
         
         # GET /activation/{activationId}
-        - "01021007F" # Invalid activation ID format
-        - "01041000F" # Activation not found
-        - "01041001F" # Activation not visible to non-admin
+        - "01021007E" # Invalid activation ID format
+        - "01041000E" # Activation not found
+        - "01041001E" # Activation not visible to non-admin
         
         # GET /activation/payer
-        - "01021008F" # Missing Payer ID
-        - "01021013F" # Invalid Payer ID format
+        - "01021008E" # Missing Payer ID
+        - "01021013E" # Invalid Payer ID format
       
       minLength: 9
       maxLength: 9
-      example: "01021000F"
+      example: "01021000E"
     
     ErrorDescription:
       description: Error description.
@@ -897,7 +897,7 @@ components:
         - code
         - description
       example:
-        code: "01021000F"
+        code: "01021000E"
         description: "Wrong party identifier"
 
     Errors:
@@ -924,7 +924,7 @@ components:
         - errors
       example:
         errors:
-          - code: "01021000F"
+          - code: "01021000E"
             description: "Wrong party identifier"
 
     Type2Error:
