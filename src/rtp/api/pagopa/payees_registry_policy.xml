@@ -4,8 +4,8 @@
 
     <set-variable name="storageUrl" value="@{
         var account   = \"${storage_account_name}\";
-        var container = \"rtp-debtor-service-provider\";
-        var blobName  = \"serviceregistry.json\";
+        var container = \"rtp-payees-registry\";
+        var blobName  = \"payees.json\";
         return $\"https://{account}.blob.core.windows.net/{container}/{blobName}\";
     }" />
 
