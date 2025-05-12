@@ -1,37 +1,43 @@
 <policies>
-    <inbound>
-        <base/>
-        <return-response>
-            <set-status code="200" reason="OK"/>
-            <set-header name="Content-Type" exists-action="override">
-                <value>application/json</value>
-            </set-header>
-            <set-body>
-                {
-                "payees": [
-                {
-                "payeeId": "02438750586",
-                "name": "Roma Capitale"
-                },
-                {
-                "payeeId": "80015010723",
-                "name": "Comune di Bari"
-                }
-                ],
-                "page": {
-                "totalElements": 2,
-                "totalPages": 1,
-                "page": 0,
-                "size": 2
-                }
-                }
-            </set-body>
-        </return-response>
-    </inbound>
-    <backend>
-        <base/>
-    </backend>
-    <outbound>
-        <base/>
-    </outbound>
+  <inbound>
+    <base />
+
+    <set-variable name="storageUrl" value="@{
+        var account   = \"${storage_account_name}\";
+        var container = \"rtp-debtor-service-provider\";
+        var blobName  = \"serviceregistry.json\";
+        return $\"https://{account}.blob.core.windows.net/{container}/{blobName}\";
+    }" />
+
+    <send-request mode="new"
+                  response-variable-name="storageResponse"
+                  timeout="20">
+      <set-url>@(context.Variables["storageUrl"])</set-url>
+      <set-method>GET</set-method>
+      <set-header name="x-ms-version" exists-action="override">
+        <value>2020-10-02</value>
+      </set-header>
+      <authentication-managed-identity resource="https://storage.azure.com" />
+    </send-request>
+
+    <return-response>
+      <set-status code="200" reason="OK" />
+      <set-header name="Content-Type" exists-action="override">
+        <value>application/json</value>
+      </set-header>
+      <set-body>@(context.Variables["storageResponse"].Body)</set-body>
+    </return-response>
+  </inbound>
+
+  <backend>
+    <base/>
+  </backend>
+
+  <outbound>
+    <base/>
+  </outbound>
+
+  <on-error>
+    <base/>
+  </on-error>
 </policies>

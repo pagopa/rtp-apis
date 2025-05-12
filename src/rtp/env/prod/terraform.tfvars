@@ -20,3 +20,5 @@ dns_zone_prefix = "cstar.pagopa.it"
 enable_auth_send = true
 
 enable_api_diagnostics = true
+
+rtp_storage_account_name = "cstarpweurtpblobstorage"

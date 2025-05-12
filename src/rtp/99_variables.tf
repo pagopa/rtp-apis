@@ -65,3 +65,8 @@ variable "enable_api_diagnostics" {
   type        = bool
   default     = false
 }
+
+variable "rtp_storage_account_name" {
+  type        = string
+  description = "The name of the storage account for RTP service registry"
+}
