@@ -1,0 +1,23 @@
+<policies>
+  <inbound>
+    <base />
+    <include-fragment fragment-id="rtp-validate-token-mcshared" />
+    <!-- Add required-claims check after including the fragment -->
+    <validate-jwt header-name="Authorization" require-scheme="Bearer">
+      <required-claims>
+        <claim name="groups" match="any">
+          <value>read_rtp_payees</value>
+        </claim>
+      </required-claims>
+    </validate-jwt>
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>
