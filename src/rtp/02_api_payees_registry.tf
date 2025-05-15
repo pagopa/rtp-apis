@@ -48,7 +48,9 @@ resource "azurerm_api_management_api_policy" "rtp_payees_registry_policy" {
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
-  xml_content = templatefile("./api/pagopa/payees_registry_policy.xml", {
-    storage_account_name = var.rtp_storage_account_name
-  })
+  xml_content = templatefile(
+    "${path.module}/api/pagopa/payees_registry_policy.xml",
+    { storage_account_name = var.rtp_storage_account_name }
+  )
 }
+
