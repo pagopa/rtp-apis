@@ -48,9 +48,18 @@ resource "azurerm_api_management_api_policy" "rtp_payees_registry_policy" {
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
+  xml_content = templatefile("./api/pagopa/payees_registry_base_policy.xml", {})
+  depends_on  = [azurerm_api_management_policy_fragment.apim_rtp_blob_storage_validate_token]
+}
+
+resource "azurerm_api_management_api_operation_policy" "rtp_payees_registry_get_policy" {
+  api_name            = azurerm_api_management_api.rtp_payees_registry_api.name
+  api_management_name = data.azurerm_api_management.this.name
+  resource_group_name = data.azurerm_api_management.this.resource_group_name
+  operation_id        = "getPayees"
+
   xml_content = templatefile(
-    "${path.module}/api/pagopa/payees_registry_policy.xml",
+    "${path.module}/api/pagopa/payees_registry_get_policy.xml",
     { storage_account_name = var.rtp_storage_account_name }
   )
 }
-
