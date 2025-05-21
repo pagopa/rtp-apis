@@ -111,6 +111,33 @@ components:
       format: int32
       minimum: 1
       maximum: 240
+    MtlsEnabled:
+      description: Flag indicating if MTLS is enabled for a service provider.
+      type: boolean
+      example: true
+    Role:
+      description: Role of the service provider.
+      type: string
+      minLength: 1
+      maxLength: 64
+      example: "ADMIN"
+    Errors:
+      description: Body of an error response.
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          $ref: "#/components/schemas/ErrorCode"
+        description:
+          $ref: "#/components/schemas/ErrorDescription"
+        status:
+          $ref: "#/components/schemas/StatusCode"
+      required:
+        - code
+        - description
+        - status
+
+
 
     # --------------------------------------------------------------------------
     # Basic types for error handling.
@@ -207,7 +234,9 @@ components:
           description: OAuth2 token endpoint.
           type: string
           format: uri
-          pattern: "^https://[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\\.[a-zA-Z]{2,})+(/[a-zA-Z0-9._~:/?#[\\]@!$&'()*+,;=]*)?$"
+          pattern: "^https://[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\\.[a-zA-Z]{2,})+(/[a-zA-Z0-9._~:/?#[\\]@!$&'()*+,;=\\-]*)?$"
+          minLength: 1
+          maxLength: 256
           example: "https://auth.example.org/oauth2/token"
         method:
           description: HTTP method for token request.
@@ -230,7 +259,7 @@ components:
           description: KeyVault URL for client secret.
           type: string
           format: uri
-          pattern: "^https://[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\\.[a-zA-Z]{2,})+(/[a-zA-Z0-9._~:/?#[\\]@!$&'()*+,;=]*)?$"
+          pattern: "^https://[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\\.[a-zA-Z]{2,})+(/[a-zA-Z0-9._~:/?#[\\]@!$&'()*+,;=\\-]*)?$"
           maxLength: 256
           example: "https://example-keyvault.vault.azure.net/secrets/example-secret"
         client_secret_env_var:
@@ -463,7 +492,6 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ServiceProviders"
-
   # ============================================================================
   # Security schemes.
   # ============================================================================
