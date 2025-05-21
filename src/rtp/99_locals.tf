@@ -9,19 +9,4 @@ locals {
 
   rtp_base_url  = "https://api-rtp.${var.dns_zone_prefix}"
   rtp_fe_origin = "${var.domain}.${var.dns_zone_prefix}"
-
-  apis = {
-    service_providers = {
-      api_ref      = azurerm_api_management_api.rtp_service_providers_registry_api
-      xml_template = "${path.module}/api/pagopa/service_providers_registry_base_policy.xml"
-    }
-    payees = {
-      api_ref      = azurerm_api_management_api.rtp_payees_registry_api
-      xml_template = "${path.module}/api/pagopa/payees_registry_base_policy.xml"
-    }
-  }
-
-  mc_shared_base_url = "https://api-mcshared.${var.dns_zone_prefix}"
-
-
 }
