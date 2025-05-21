@@ -43,15 +43,6 @@ resource "azurerm_api_management_product_api" "rtp_service_providers_registry_pr
   depends_on = [azurerm_api_management_product.rtp, azurerm_api_management_api.rtp_service_providers_registry_api]
 }
 
-resource "azurerm_api_management_api_policy" "rtp_service_providers_registry_policy" {
-  api_name            = azurerm_api_management_api.rtp_service_providers_registry_api.name
-  api_management_name = data.azurerm_api_management.this.name
-  resource_group_name = data.azurerm_api_management.this.resource_group_name
-
-  xml_content = templatefile("./api/pagopa/service_providers_registry_base_policy.xml", {})
-  depends_on  = [azurerm_api_management_policy_fragment.apim_rtp_blob_storage_validate_token]
-}
-
 resource "azurerm_api_management_api_operation_policy" "rtp_service_providers_registry_get_policy" {
   api_name            = azurerm_api_management_api.rtp_service_providers_registry_api.name
   api_management_name = data.azurerm_api_management.this.name

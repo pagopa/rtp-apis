@@ -70,3 +70,12 @@ variable "rtp_storage_account_name" {
   type        = string
   description = "The name of the storage account for RTP service registry"
 }
+
+variable "api_group_names" {
+  type = map(string)
+  default = {
+    service_providers = "read_service_registry"
+    payees            = "read_rtp_payees"
+  }
+  description = "JWT group claim richiesto per ciascuna API RTP."
+}
