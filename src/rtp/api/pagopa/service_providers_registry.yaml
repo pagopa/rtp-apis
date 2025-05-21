@@ -118,6 +118,7 @@ components:
     Role:
       description: Role of the service provider.
       type: string
+      pattern: "^[ -~]{1,64}$"
       minLength: 1
       maxLength: 64
       example: "ADMIN"
@@ -354,7 +355,7 @@ components:
         id: "SP001"
         name: "Example Service Provider"
         tsp_id: "TSP001"
-        role: ""
+        role: "ADMIN"
 
     SPs:
       description: List of Service Providers.
@@ -367,11 +368,11 @@ components:
         - id: "SP001"
           name: "Example Service Provider 1"
           tsp_id: "TSP001"
-          role: ""
+          role: "ADMIN"
         - id: "SP002"
           name: "Example Service Provider 2"
           tsp_id: "TSP002"
-          role: ""
+          role: "ADMIN"
 
     ServiceProviders:
       description: Combined Technical Service Providers and Service Providers.
@@ -401,11 +402,11 @@ components:
           - id: "SP001"
             name: "Example Service Provider 1"
             tsp_id: "TSP001"
-            role: ""
+            role: "ADMIN"
           - id: "SP002"
             name: "Example Service Provider 2"
             tsp_id: "TSP002"
-            role: ""
+            role: "ADMIN"
 
   # ============================================================================
   # Parameters.
