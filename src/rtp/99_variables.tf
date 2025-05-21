@@ -70,3 +70,13 @@ variable "rtp_storage_account_name" {
   type        = string
   description = "The name of the storage account for RTP service registry"
 }
+
+variable "rtp_payees_group_name" {
+  type        = string
+  description = "JWT group claim payees"
+}
+
+variable "rtp_service_providers_group_name" {
+  type        = string
+  description = "JWT group claim service providers"
+}

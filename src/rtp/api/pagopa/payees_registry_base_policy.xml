@@ -13,7 +13,7 @@
 <policies>
     <inbound>
         <base />
-        <include-fragment fragment-id="rtp-validate-token-mcshared" />
+        <include-fragment fragment-id="rtp-validate-blob-storage-payees-token-mcshared" />
     </inbound>
     <backend>
         <base />
