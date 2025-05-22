@@ -49,7 +49,7 @@ resource "azurerm_api_management_api_policy" "rtp_payees_registry_policy" {
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
   xml_content = templatefile("./api/pagopa/payees_registry_base_policy.xml", {})
-  depends_on  = [azurerm_api_management_policy_fragment.apim_rtp_blob_storage_validate_token]
+  depends_on  = [azurerm_api_management_policy_fragment.apim_rtp_blob_storage_payees_validate_token]
 }
 
 resource "azurerm_api_management_api_operation_policy" "rtp_payees_registry_get_policy" {

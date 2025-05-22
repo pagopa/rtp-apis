@@ -22,3 +22,6 @@ enable_auth_send = true
 enable_api_diagnostics = true
 
 rtp_storage_account_name = "cstardweurtpblobstorage"
+
+rtp_payees_group_name            = "read_rtp_payees"
+rtp_service_providers_group_name = "read_service_registry"
