@@ -26,7 +26,7 @@ resource "azurerm_api_management_api" "rtp_service_provider_api" {
 
   depends_on = [azurerm_api_management_product.rtp]
 
-  service_url = "https://${local.product}-rtp-activator-ca.${data.azurerm_container_app_environment.cae.default_domain}"
+  service_url = "https://${local.product}-rtp-sender-ca.${data.azurerm_container_app_environment.cae.default_domain}"
 
   import {
     content_format = "openapi"
