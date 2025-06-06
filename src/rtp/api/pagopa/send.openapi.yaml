@@ -781,7 +781,7 @@ components:
           type: string
           minLength: 1
           maxLength: 10
-          pattern: "^[A-Z_]{1,10}$"
+          pattern: "^[a-zA-Z_]{1,10}$"
           example: "flgConf"
         status:
           $ref: '#/components/schemas/RtpStatus'
@@ -1022,3 +1022,4 @@ components:
           scopes:
             admin_rtp_send: Admin RPT.
             write_rtp_send: Create, update or delete RTP.
+            read_rtp_send: Read access to RTP APIs.
