@@ -249,18 +249,7 @@ paths:
           - $ref: '#/components/parameters/RtpId'
         responses:
           "200":
-            description: RTP found
-            headers:
-              RateLimit-Limit:
-                $ref: '#/components/schemas/RateLimitLimit'
-              RateLimit-Reset:
-                $ref: '#/components/schemas/RateLimitReset'
-              Retry-After:
-                $ref: '#/components/schemas/RetryAfter'
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/Rtp'
+            $ref: '#/components/responses/findRtp'
           "400":
             #description: |
             #  Bad request.
@@ -921,6 +910,37 @@ components:
           required: false
           schema:
             $ref: '#/components/schemas/RetryAfter'
+
+    findRtp:
+      description: RTP successfully retrieved by ID.
+      headers:
+        Access-Control-Allow-Origin:
+          description: |
+            Indicates whether the response can be shared with requesting code
+            from the given origin.
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessControlAllowOrigin'
+        RateLimit-Limit:
+          description: The number of allowed requests in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitLimit'
+        RateLimit-Reset:
+          description: The number of seconds left in the current period.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RateLimitReset'
+        Retry-After:
+          description: |
+            The number of seconds to wait before allowing a follow-up request.
+          required: false
+          schema:
+            $ref: '#/components/schemas/RetryAfter'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Rtp'
             
     Error:
       description: Response returned when an error occured.
