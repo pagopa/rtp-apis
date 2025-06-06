@@ -538,114 +538,6 @@ components:
         error: "Unsupported Media Type"
         requestId: "3fb00d0f-416"
 
-    Rtp:
-      type: object
-      properties:
-        resourceID:
-          type: string
-          format: uuid
-          maxLength: 36
-        noticeNumber:
-          type: string
-          maxLength: 35
-        amount:
-          type: number
-          format: double
-        description:
-          type: string
-          maxLength: 255
-        expiryDate:
-          type: string
-          format: date-time
-        payerName:
-          type: string
-          maxLength: 255
-        payerId:
-          type: string
-          maxLength: 50
-        payeeName:
-          type: string
-          maxLength: 255
-        payeeId:
-          type: string
-          maxLength: 50
-        subject:
-          type: string
-          maxLength: 255
-        savingDateTime:
-          type: string
-          format: date-time
-        serviceProviderDebtor:
-          type: string
-          maxLength: 100
-        iban:
-          type: string
-          maxLength: 34
-        payTrxRef:
-          type: string
-          maxLength: 64
-        flgConf:
-          type: string
-          maxLength: 10
-        status:
-          $ref: '#/components/schemas/RtpStatus'
-        serviceProviderCreditor:
-          type: string
-          maxLength: 100
-        events:
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/Event'
-
-
-    Event:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          maxLength: 30
-        precStatus:
-          $ref: '#/components/schemas/RtpStatus'
-        triggerEvent:
-          $ref: '#/components/schemas/RtpEvent'
-      required:
-        - timestamp
-        - triggerEvent
-
-
-    RtpStatus:
-      type: string
-      enum:
-        - CREATED
-        - SENT
-        - CANCELLED
-        - ACCEPTED
-        - REJECTED
-        - USER_ACCEPTED
-        - USER_REJECTED
-        - PAYED
-        - ERROR_SEND
-        - CANCELLED_ACCR
-        - CANCELLED_REJECTED
-        - ERROR_CANCEL
-
-    RtpEvent:
-      type: string
-      enum:
-        - CREATE_RTP
-        - SEND_RTP
-        - CANCEL_RTP
-        - ACCEPT_RTP
-        - REJECT_RTP
-        - USER_ACCEPT_RTP
-        - USER_REJECT_RTP
-        - PAY_RTP
-        - ERROR_SEND_RTP
-        - ERROR_CANCEL_RTP
-        - CANCEL_RTP_ACCR
-        - CANCEL_RTP_REJECTED
 
     # --------------------------------------------------------------------------
     # Domain specific types.
@@ -798,6 +690,163 @@ components:
         - paymentNotice
         - payer
         - payee
+
+    Rtp:
+      type: object
+      properties:
+        resourceID:
+          type: string
+          format: uuid
+          minLength: 36
+          maxLength: 36
+          pattern: "^[a-fA-F0-9\\-]{36}$"
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        noticeNumber:
+          type: string
+          minLength: 18
+          maxLength: 18
+          pattern: "^\\d{18}$"
+          example: "311111111112222123"
+        amount:
+          type: number
+          format: double
+          example: 1050.75
+        description:
+          type: string
+          minLength: 1
+          maxLength: 255
+          pattern: "^[ -~]{1,255}$"
+          example: "Paga questo avviso"
+        expiryDate:
+          type: string
+          format: date-time
+          minLength: 10
+          maxLength: 30
+          example: "2025-12-31T23:59:59Z"
+        payerName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          pattern: "^[ -~]{1,255}$"
+          example: "Pigrolo"
+        payerId:
+          type: string
+          minLength: 11
+          maxLength: 16
+          pattern: "^(([A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z])|(\\d{11}))$"
+          example: "RSSMRA85T10A562S"
+        payeeName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          pattern: "^[ -~]{1,255}$"
+          example: "Comune di Roma"
+        payeeId:
+          type: string
+          minLength: 11
+          maxLength: 16
+          pattern: "\\d{11}|\\d{16}"
+          example: "77777777777"
+        subject:
+          type: string
+          minLength: 1
+          maxLength: 255
+          pattern: "^[ -~]{1,255}$"
+          example: "TARI 2025"
+        savingDateTime:
+          type: string
+          format: date-time
+          minLength: 10
+          maxLength: 30
+          example: "2025-06-06T08:40:16.781Z"
+        serviceProviderDebtor:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "^[ -~]{1,100}$"
+          example: "FAKESP01"
+        iban:
+          type: string
+          minLength: 15
+          maxLength: 34
+          pattern: "^[A-Z]{2}\\d{2}[A-Z0-9]{1,30}$"
+          example: "IT60X0542811101000000123456"
+        payTrxRef:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: "^[ -~]{1,64}$"
+          example: "ABC/124"
+        flgConf:
+          type: string
+          minLength: 1
+          maxLength: 10
+          pattern: "^[A-Z_]{1,10}$"
+          example: "flgConf"
+        status:
+          $ref: '#/components/schemas/RtpStatus'
+        serviceProviderCreditor:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "^[ -~]{1,100}$"
+          example: "PA123456789"
+        events:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/Event'
+          example:
+            - timestamp: "2025-06-06T08:40:16.781Z"
+              precStatus: "CREATED"
+              triggerEvent: "CREATE_RTP"
+
+    Event:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          maxLength: 30
+        precStatus:
+          $ref: '#/components/schemas/RtpStatus'
+        triggerEvent:
+          $ref: '#/components/schemas/RtpEvent'
+      required:
+        - timestamp
+        - triggerEvent
+
+    RtpStatus:
+      type: string
+      enum:
+        - CREATED
+        - SENT
+        - CANCELLED
+        - ACCEPTED
+        - REJECTED
+        - USER_ACCEPTED
+        - USER_REJECTED
+        - PAYED
+        - ERROR_SEND
+        - CANCELLED_ACCR
+        - CANCELLED_REJECTED
+        - ERROR_CANCEL
+
+    RtpEvent:
+      type: string
+      enum:
+        - CREATE_RTP
+        - SEND_RTP
+        - CANCEL_RTP
+        - ACCEPT_RTP
+        - REJECT_RTP
+        - USER_ACCEPT_RTP
+        - USER_REJECT_RTP
+        - PAY_RTP
+        - ERROR_SEND_RTP
+        - ERROR_CANCEL_RTP
+        - CANCEL_RTP_ACCR
+        - CANCEL_RTP_REJECTED
 
     # --------------------------------------------------------------------------
     # Basic types for technical stuff.
