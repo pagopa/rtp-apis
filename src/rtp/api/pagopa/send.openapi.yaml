@@ -235,6 +235,96 @@ paths:
           #description: Unexpected error.
           $ref: '#/components/responses/Error'
 
+  /rtps/{rtpId}:
+      get:
+        operationId: getRtpById
+        summary: Retrieve a RTP by its ID
+        description: Returns RTP data associated with the given ID
+        tags: [rtps]
+        security:
+          - oAuth2: [admin_rtp_send, write_rtp_send]
+        parameters:
+          - $ref: '#/components/parameters/RequestId'
+          - $ref: '#/components/parameters/Version'
+          - $ref: '#/components/parameters/RtpId'
+        responses:
+          "200":
+            description: RTP found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Rtp'
+          "400":
+            #description: |
+            #  Bad request.
+
+            #  Possible error codes:
+            #  - 02021000E: Invalid request format
+            #  - 02021013E: Invalid rtpId format
+            #  - 02021009E: Required header missing
+            $ref: '#/components/responses/Error'
+          "401":
+            #description: |
+            #  Wrong credentials.
+
+            #  Possible error codes:
+            #  - 02011000E: Missing authentication token
+            #  - 02011001E: Invalid token format
+            #  - 02011002E: Expired token
+            #  - 02011003F: Invalid signature
+            $ref: '#/components/responses/Error'
+          "403":
+            #description: |
+            #  Forbidden.
+
+            #  Possible error codes:
+            #  - 02011004E: Insufficient permissions
+            #  - 02011005E: Invalid scope
+            #  - 02011006E: Account suspended
+            $ref: '#/components/responses/Error'
+          "404":
+            #description: |
+            #  Not found.
+
+            #  Possible error codes:
+            #  - 02041000E: RTP not found
+            $ref: '#/components/responses/Error'
+          "406":
+            #description: |
+            #  Not acceptable. Did you require application/json?
+
+            #  Possible error codes:
+            #  - 02021010E: Unsupported accept header
+            $ref: '#/components/responses/Error'
+          "429":
+            #description: |
+            #  Too many requests.
+
+            #  Possible error codes:
+            #  - 02051000E: Rate limit exceeded
+            #  - 02051001E: Quota exceeded
+            $ref: '#/components/responses/Error'
+          "500":
+            #description: |
+            #  Server error.
+
+            #  Possible error codes:
+            #  - 02091000F: Internal server error
+            #  - 02091001F: Database error
+            #  - 02091002F: Integration failure
+            $ref: '#/components/responses/Error'
+          "504":
+            #description: |
+            #  Timeout communicating with Debtor Service Provider.
+
+            #  Possible error codes:
+            #  - 02051002F: Debtor Service Provider timeout
+            #  - 02051003F: Integration processing timeout
+            $ref: '#/components/responses/Error'
+          default:
+            #description: Unexpected error.
+            $ref: '#/components/responses/Error'
+
 components:
   schemas:
     # --------------------------------------------------------------------------
@@ -447,6 +537,100 @@ components:
         status: 415
         error: "Unsupported Media Type"
         requestId: "3fb00d0f-416"
+
+    Rtp:
+      type: object
+      properties:
+        resourceID:
+          type: string
+          format: uuid
+        noticeNumber:
+          type: string
+        amount:
+          type: number
+          format: double
+        description:
+          type: string
+        expiryDate:
+          type: string
+          format: date-time
+        payerName:
+          type: string
+        payerId:
+          type: string
+        payeeName:
+          type: string
+        payeeId:
+          type: string
+        subject:
+          type: string
+        savingDateTime:
+          type: string
+          format: date-time
+        serviceProviderDebtor:
+          type: string
+        iban:
+          type: string
+        payTrxRef:
+          type: string
+        flgConf:
+          type: string
+        status:
+          $ref: '#/components/schemas/RtpStatus'
+        serviceProviderCreditor:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+
+
+    Event:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        precStatus:
+          $ref: '#/components/schemas/RtpStatus'
+        triggerEvent:
+          $ref: '#/components/schemas/RtpEvent'
+      required:
+        - timestamp
+        - triggerEvent
+
+
+    RtpStatus:
+      type: string
+      enum:
+        - CREATED
+        - SENT
+        - CANCELLED
+        - ACCEPTED
+        - REJECTED
+        - USER_ACCEPTED
+        - USER_REJECTED
+        - PAYED
+        - ERROR_SEND
+        - CANCELLED_ACCR
+        - CANCELLED_REJECTED
+        - ERROR_CANCEL
+
+    RtpEvent:
+      type: string
+      enum:
+        - CREATE_RTP
+        - SEND_RTP
+        - CANCEL_RTP
+        - ACCEPT_RTP
+        - REJECT_RTP
+        - USER_ACCEPT_RTP
+        - USER_REJECT_RTP
+        - PAY_RTP
+        - ERROR_SEND_RTP
+        - ERROR_CANCEL_RTP
+        - CANCEL_RTP_ACCR
+        - CANCEL_RTP_REJECTED
 
     # --------------------------------------------------------------------------
     # Domain specific types.
