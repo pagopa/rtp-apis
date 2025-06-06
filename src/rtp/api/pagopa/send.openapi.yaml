@@ -242,7 +242,7 @@ paths:
         description: Returns RTP data associated with the given ID
         tags: [rtps]
         security:
-          - oAuth2: [admin_rtp_send, write_rtp_send]
+          - oAuth2: [admin_rtp_send, read_rtp_send]
         parameters:
           - $ref: '#/components/parameters/RequestId'
           - $ref: '#/components/parameters/Version'
@@ -544,43 +544,57 @@ components:
         resourceID:
           type: string
           format: uuid
+          maxLength: 36
         noticeNumber:
           type: string
+          maxLength: 35
         amount:
           type: number
           format: double
         description:
           type: string
+          maxLength: 255
         expiryDate:
           type: string
           format: date-time
         payerName:
           type: string
+          maxLength: 255
         payerId:
           type: string
+          maxLength: 50
         payeeName:
           type: string
+          maxLength: 255
         payeeId:
           type: string
+          maxLength: 50
         subject:
           type: string
+          maxLength: 255
         savingDateTime:
           type: string
           format: date-time
         serviceProviderDebtor:
           type: string
+          maxLength: 100
         iban:
           type: string
+          maxLength: 34
         payTrxRef:
           type: string
+          maxLength: 64
         flgConf:
           type: string
+          maxLength: 10
         status:
           $ref: '#/components/schemas/RtpStatus'
         serviceProviderCreditor:
           type: string
+          maxLength: 100
         events:
           type: array
+          maxItems: 100
           items:
             $ref: '#/components/schemas/Event'
 
@@ -591,6 +605,7 @@ components:
         timestamp:
           type: string
           format: date-time
+          maxLength: 30
         precStatus:
           $ref: '#/components/schemas/RtpStatus'
         triggerEvent:
