@@ -250,6 +250,13 @@ paths:
         responses:
           "200":
             description: RTP found
+            headers:
+              RateLimit-Limit:
+                $ref: '#/components/schemas/RateLimitLimit'
+              RateLimit-Reset:
+                $ref: '#/components/schemas/RateLimitReset'
+              Retry-After:
+                $ref: '#/components/schemas/RetryAfter'
             content:
               application/json:
                 schema:
