@@ -237,7 +237,7 @@ paths:
 
   /rtps/{rtpId}:
       get:
-        operationId: getRtpById
+        operationId: findRtpById
         summary: Retrieve a RTP by its ID
         description: Returns RTP data associated with the given ID
         tags: [rtps]
