@@ -206,6 +206,13 @@ paths:
           #  Possible error codes:
           #  - 02021010E: Unsupported accept header
           $ref: '#/components/responses/Error'
+        "422":
+          #description: |
+          #  Unprocessable entity
+
+          #  Possible error codes:
+          #  - 02031005E: Business rule violation
+          $ref: '#/components/responses/Error'
         "429":
           #description: |
           #  Too many requests.
