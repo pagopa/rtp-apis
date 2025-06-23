@@ -118,6 +118,7 @@ paths:
           #  - 02031003E: Invalid payment notice
           #  - 02031004E: Expired payment notice
           #  - 02031005E: Business rule violation
+          #  - 02031006E: Payer not activated.
           $ref: '#/components/responses/Error'
         "429":
           #description: |
@@ -407,6 +408,7 @@ components:
         - "02031003E" # Invalid payment notice
         - "02031004E" # Expired payment notice
         - "02031005E" # Business rule violation
+        - "02031006E" # Payer not activated.
         - "02051000E" # Rate limit exceeded
         - "02051001E" # Quota exceeded
         - "02091000F" # Internal server error
