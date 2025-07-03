@@ -1,23 +1,9 @@
-## RTP Send Callback API ##
-resource "azurerm_api_management_api_version_set" "rtp_callback_api" {
-  name                = "${var.env_short}-rtp-callback-api"
-  api_management_name = data.azurerm_api_management.this.name
-  resource_group_name = data.azurerm_api_management.this.resource_group_name
-
-  display_name        = "RTP Callback API"
-  versioning_scheme   = "Header"
-  version_header_name = "Version"
-}
-
 resource "azurerm_api_management_api" "rtp_callback_api" {
   name                = "${var.env_short}-rtp-callback-api"
   api_management_name = data.azurerm_api_management.this.name
   resource_group_name = data.azurerm_api_management.this.resource_group_name
 
-  version_set_id = azurerm_api_management_api_version_set.rtp_callback_api.id
-
   revision              = "1"
-  version               = "v1"
   description           = "RTP CALLBACK API"
   display_name          = "RTP CALLBACK API"
   path                  = "rtp/cb"
