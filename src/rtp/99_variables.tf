@@ -80,3 +80,8 @@ variable "rtp_service_providers_group_name" {
   type        = string
   description = "JWT group claim service providers"
 }
+
+variable "switch_weu" {
+  type    = bool
+  default = false
+}

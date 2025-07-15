@@ -25,3 +25,4 @@ rtp_storage_account_name = "cstaruweurtpblobstorage"
 
 rtp_payees_group_name            = "read_rtp_payees"
 rtp_service_providers_group_name = "read_service_registry"
+switch_weu                       = true

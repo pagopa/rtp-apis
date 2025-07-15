@@ -20,7 +20,7 @@ resource "azurerm_api_management_api" "rtp_service_provider_api" {
   version               = "v1"
   description           = "RTP Service Provider API"
   display_name          = "RTP Service Provider API"
-  path                  = "rtp"
+  path                  = local.context_path
   protocols             = ["https"]
   subscription_required = false
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 ############################################################
 # Terraform script for managing infrastructure on Azure
-# Fingerprint: d2hhdHlvdXdhbnQ/Cg==
+# md5: 065397c756f4c6a1ba29f44d1e00ef74
 ############################################################
 # Global variables
 # Version format x.y accepted
@@ -113,7 +113,7 @@ function help_usage() {
 
 function init_terraform() {
   if [ -n "$env" ]; then
-    terraform init -reconfigure -backend-config="./env/$env/backend.tfvars" $other
+    terraform init -reconfigure -backend-config="./env/$env/backend.tfvars"
   else
     echo "ERROR: no env configured!"
     exit 1
@@ -262,87 +262,6 @@ function update_script() {
   rm "$tmp_file" 2>/dev/null
 }
 
-# Function to check if user is logged into Azure
-function check_azure_login() {
-  # Check if az CLI is available
-  if [ -z "$(command -v az)" ]; then
-    echo "Azure CLI (az) not found. Please install it first."
-    return 1
-  fi
-  
-  # Try to get current account info to check login status
-  local account_info
-  account_info=$(az account show 2>/dev/null)
-  local exit_code=$?
-  
-  # Check if the token is valid by trying to list resource groups
-  # This will fail if the token is expired
-  if [ $exit_code -eq 0 ]; then
-    az group list --query "[].name" --output tsv >/dev/null 2>&1
-    exit_code=$?
-  fi
-  
-  
-  if [ $exit_code -ne 0 ]; then
-    echo "You are not logged into Azure. Opening Azure login page..."
-    
-    # Check the operating system to determine how to open the browser
-    local os_type=$(uname)
-    local open_command
-    
-    if [ "$os_type" == "Darwin" ]; then
-      # macOS
-      open_command="open"
-    elif [ "$os_type" == "Linux" ]; then
-      # Linux - check for common commands
-      if command -v xdg-open &>/dev/null; then
-        open_command="xdg-open"
-      elif command -v gnome-open &>/dev/null; then
-        open_command="gnome-open"
-      elif command -v kde-open &>/dev/null; then
-        open_command="kde-open"
-      else
-        echo "Could not find a browser opener. Please manually go to https://portal.azure.com"
-        open_command=""
-      fi
-    elif [[ "$os_type" == MINGW* ]] || [[ "$os_type" == MSYS* ]] || [[ "$os_type" == CYGWIN* ]]; then
-      # Windows with Git Bash or similar
-      open_command="start"
-    else
-      echo "Unsupported OS. Please manually go to https://portal.azure.com"
-      open_command=""
-    fi
-    
-    # Start the Azure CLI login process which will open a browser tab
-    if [ -n "$open_command" ]; then
-      echo "Starting Azure login process. A browser window will open..."
-      
-      # Only use az login which will open the browser automatically
-      az login
-      
-      # Check if login was successful
-      if [ $? -ne 0 ]; then
-        echo "Azure login failed. Please try again."
-        return 1
-      else
-        echo "Login successful!"
-      fi
-    else
-      echo "Please login to Azure by running 'az login' manually"
-      return 1
-    fi
-  else
-    # User is already logged in, show account info
-    # Extract using more portable grep expressions
-    local user_name=$(echo "$account_info" | grep '"name"' | sed 's/.*"name": "\([^"]*\)".*/\1/')
-    local tenant_name=$(echo "$account_info" | grep '"tenantId"' | sed 's/.*"tenantId": "\([^"]*\)".*/\1/')
-    echo "You are already logged into Azure as: $user_name (Tenant: $tenant_name)"
-  fi
-  
-  
-  return 0
-}
-
 # Check arguments number
 if [ "$#" -lt 1 ]; then
   help_usage
@@ -356,16 +275,6 @@ filetf=$3
 shift 2
 other=$@
 
-# First check Azure login status before proceeding
-if [ "$action" != "help" ] && [ "$action" != "clean" ] && [ "$action" != "?" ] && [ "$action" != "-h" ]; then
-  check_azure_login
-  login_status=$?
-  if [ $login_status -ne 0 ]; then
-    echo "Azure login check failed. Cannot proceed with terraform commands."
-    exit 1
-  fi
-fi
-
 if [ -n "$env" ]; then
   # shellcheck source=/dev/null
   source "./env/$env/backend.ini"
@@ -374,6 +283,7 @@ if [ -n "$env" ]; then
     exit 1
   fi
   az account set -s "${subscription}"
+  export ARM_SUBSCRIPTION_ID=$(az account list --query "[?isDefault].id" --output tsv)
 fi
 
 # Call appropriate function based on action

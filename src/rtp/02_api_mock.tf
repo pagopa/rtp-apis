@@ -7,7 +7,7 @@ resource "azurerm_api_management_api" "rtp_mock_api_epc" {
   revision              = "1"
   description           = "RTP MOCK API EPC"
   display_name          = "RTP MOCK API EPC"
-  path                  = "rtp/mock"
+  path                  = "${local.context_path}/mock"
   protocols             = ["https"]
   subscription_required = false
 

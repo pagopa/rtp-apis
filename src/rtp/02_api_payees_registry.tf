@@ -20,7 +20,7 @@ resource "azurerm_api_management_api" "rtp_payees_registry_api" {
   version               = "v1"
   description           = "RTP Payees Registry API"
   display_name          = "RTP Payees Registry API"
-  path                  = "rtp/payees"
+  path                  = "${local.context_path}/payees"
   protocols             = ["https"]
   subscription_required = false
 
