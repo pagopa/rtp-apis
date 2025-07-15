@@ -1,3 +1,5 @@
+# Deprecated environment
+
 # general
 prefix         = "cstar"
 env_short      = "d"

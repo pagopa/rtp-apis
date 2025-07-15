@@ -21,7 +21,7 @@ resource "azurerm_api_management_api" "rtp_activation_api" {
   version               = "v1"
   description           = "RTP Activation API"
   display_name          = "RTP Activation API"
-  path                  = "rtp/activation"
+  path                  = "${local.context_path}/activation"
   protocols             = ["https"]
   subscription_required = false
 

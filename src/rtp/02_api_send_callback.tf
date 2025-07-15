@@ -6,7 +6,7 @@ resource "azurerm_api_management_api" "rtp_callback_api" {
   revision              = "1"
   description           = "RTP CALLBACK API"
   display_name          = "RTP CALLBACK API"
-  path                  = "rtp/cb"
+  path                  = "${local.context_path}/cb"
   protocols             = ["https"]
   subscription_required = false
 
